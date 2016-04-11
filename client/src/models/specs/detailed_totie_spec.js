@@ -178,4 +178,18 @@ describe("Detailed Totie", function(){
     detailedTotie1.updateComment(1, "This looks like a cheap place to eat.")
     assert.deepEqual("This looks like a cheap place to eat.", detailedTotie1.getComment(1))
   })
+
+  it("should have a function to return a commments index", function(){
+    assert.equal(1, detailedTotie1.getCommentIndex(2))
+  })
+
+  it("should return undefined if index does not exist", function(){
+    assert.equal(undefined, detailedTotie1.getCommentIndex(3))
+  })
+
+  // it("should be able to remove a comment for given id", function(){
+  //   detailedTotie1.addComment("This is a lovely looking bar!");
+  //   detailedTotie1.removeComment(3);
+  //   assert.deepEqual(["This looks like a nice and cheap place to eat?", "Need to check if they do vegen and gluten free"], detailedTotie1.getAllComments())
+  // })
 })

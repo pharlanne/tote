@@ -66,7 +66,19 @@ DetailedTotie.prototype = {
         commentObject.text = newText;
       };
     });
+  }, 
+  getCommentIndex: function(inputtedId){
+    var result;
+    this.comments.forEach(function(commentObject){
+      if(commentObject.id === Number(inputtedId)){
+        result = this.comments.indexOf(commentObject);
+      }
+    }.bind(this))
+    return result;
   }
+  // removeComment: function(inputtedId){
+
+  // }
 
 }
 
