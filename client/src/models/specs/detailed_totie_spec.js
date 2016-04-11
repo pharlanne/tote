@@ -139,7 +139,10 @@ describe("Detailed Totie", function(){
   it("should be able to store reviews", function(){
     assert.deepEqual( 2, detailedTotie1.reviews.length)
   })
-
+  
+  it("should be able to return reviews in text form", function(){
+    assert.deepEqual( ["Very good", "Decent"], detailedTotie1.getAllReviewsText() )
+  })
   
 
 })

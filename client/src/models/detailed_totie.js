@@ -27,6 +27,13 @@ DetailedTotie.prototype = {
       }
     })
   return result
+  },
+  getAllReviewsText: function(){
+    var result = [];
+    for (review of this.reviews){
+      result.push(review.text);
+    }
+    return result;
   }
 
 }
