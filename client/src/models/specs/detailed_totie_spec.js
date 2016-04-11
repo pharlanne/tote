@@ -79,7 +79,7 @@ var detailedPlaceResultTwo = {
 }
 
 
-var detailedTotie1 = new DetailedTotie( detailedPlaceResult.name, detailedPlaceResult.geometry.location.lat, detailedPlaceResult.geometry.location.lng, detailedPlaceResult.formatted_address, detailedPlaceResult.formatted_phone_number, detailedPlaceResult.place_id, detailedPlaceResult.opening_hours.open_now, detailedPlaceResult.opening_hours.weekday_text, detailedPlaceResult.price_level, detailedPlaceResult.rating, detailedPlaceResult.reviews, detailedPlaceResult.website )
+var detailedTotie1 = new DetailedTotie( detailedPlaceResult.name, detailedPlaceResult.geometry.location.lat, detailedPlaceResult.geometry.location.lng, detailedPlaceResult.formatted_address, detailedPlaceResult.formatted_phone_number, detailedPlaceResult.place_id, detailedPlaceResult.opening_hours.open_now, detailedPlaceResult.opening_hours.weekday_text, detailedPlaceResult.price_level, detailedPlaceResult.rating, detailedPlaceResult.reviews, detailedPlaceResult.types, detailedPlaceResult.website )
 
 var detailedTotie2 = new DetailedTotie( detailedPlaceResultTwo.name, detailedPlaceResultTwo.geometry.location.lat, detailedPlaceResultTwo.geometry.location.lng, detailedPlaceResultTwo.formatted_address, detailedPlaceResultTwo.formatted_phone_number, detailedPlaceResultTwo.place_id, detailedPlaceResultTwo.opening_hours.open_now, detailedPlaceResultTwo.opening_hours.weekday_text, detailedPlaceResultTwo.price_level )
 
@@ -144,6 +144,10 @@ describe("Detailed Totie", function(){
     assert.deepEqual( ["Very good", "Decent"], detailedTotie1.getAllReviewsText());
   });
   
+  it("should store an array of types", function(){
+    assert.deepEqual(["restaurant", "bar", "food"], detailedTotie1.types)
+  })
+
   it("should be able to store the website", function(){
     assert.equal("https://www.jdwetherspoon.com/pubs/all-pubs/scotland/edinburgh/the-standing-order-edinburgh", detailedTotie1.website);
   });
