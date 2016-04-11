@@ -15,16 +15,20 @@ var cityGoogleObject = {
   }
 }
 
+params = {
+  "name": cityGoogleObject.address_components[0].long_name,
+  "country": cityGoogleObject.address_components[1].long_name
+}
 
-
-
-var cityOne = new City(cityGoogleObject.address_components[0].long_name);
-
-
+var cityOne = new City( params );
 
 describe("city", function(){
   it("should have a name", function(){
     assert.equal("New York", cityOne.name)
+  })
+
+  it("should have a country", function(){
+    assert.equal("United States of America", cityOne.country)
   })
 
 

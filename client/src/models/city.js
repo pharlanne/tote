@@ -1,8 +1,9 @@
 
 
 
-var City = function(name){
-  this.name = name
+var City = function(params){
+  this.name = params["name"],
+  this.country = params["country"]
 }
 
 
