@@ -195,6 +195,15 @@ describe("tote", function(){
     assert.deepEqual([cityOne, cityTwo], tote1.cities);
   });
 
+  it("should be able to return a city for a given city name", function(){
+    assert.deepEqual(cityTwo, tote1.getCity("Edinburgh"));
+  });
+
+  it("should be able to find a cities index for a given city name", function(){
+    assert.equal(0, tote1.getCityIndex("New York"));
+  });
+  
+
 
 
 
