@@ -176,6 +176,10 @@ describe("city", function(){
     assert.deepEqual([detailedTotie1, detailedTotie2, detailedTotie3], cityOne.toties)
   })
 
+  it("should be able to return a specific totie for a given name", function(){
+    assert.deepEqual(detailedTotie2, cityOne.getTotie("All Bar One"))
+  })
+
 
 
 })

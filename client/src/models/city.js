@@ -14,6 +14,15 @@ var City = function(params){
 City.prototype = {
   addTotie: function(totie){
     this.toties.push(totie);
+  }, 
+  getTotie: function(searchQuery){
+    var result;
+    this.toties.forEach(function(totie){
+      if(totie.name.includes(searchQuery)){
+        result = totie;
+      }
+    })
+    return result;
   }
 }
 
