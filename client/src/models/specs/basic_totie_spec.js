@@ -61,9 +61,12 @@ describe("totie", function(){
   });
 
   it("should return undefined if price level is not present", function(){
-    assert.equal(undefined, basicTotie.price_level)
-  })
+    assert.equal(undefined, basicTotie.price_level);
+  });
 
+  it("should return a price level if it is present", function(){
+    assert.equal(2, basicTotieTwo.priceLevel)
+  })
 
 
 })
