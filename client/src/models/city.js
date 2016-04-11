@@ -11,5 +11,11 @@ var City = function(params){
   this.toties = []
 }
 
+City.prototype = {
+  addTotie: function(totie){
+    this.toties.push(totie);
+  }
+}
+
 
 module.exports = City;
