@@ -22,6 +22,10 @@ Tote.prototype = {
   getCityIndex: function(cityName){
     var city = this.getCity(cityName);
     return this.cities.indexOf(city);
+  },
+  removeCity: function(cityName){
+    var index = this.getCityIndex(cityName);
+    this.cities.splice(index, 1);
   }
 }
 

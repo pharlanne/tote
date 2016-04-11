@@ -202,6 +202,11 @@ describe("tote", function(){
   it("should be able to find a cities index for a given city name", function(){
     assert.equal(0, tote1.getCityIndex("New York"));
   });
+
+  it("should be able to remove a city given a city name", function(){
+    tote1.removeCity("Edinburgh");
+    assert.deepEqual([cityOne], tote1.cities)
+  })
   
 
 
