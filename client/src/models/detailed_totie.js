@@ -42,6 +42,13 @@ DetailedTotie.prototype = {
       text: input
     };
     this.comments.push(comment);
+  },
+  getAllComments: function(){
+    var result = [];
+    this.comments.forEach(function(commentObject){
+      result.push(commentObject.text)
+    })
+    return result
   }
 
 }
