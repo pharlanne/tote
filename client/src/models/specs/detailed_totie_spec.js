@@ -79,9 +79,9 @@ var detailedPlaceResultTwo = {
 }
 
 
-var detailedTotie1 = new DetailedTotie( detailedPlaceResult.name, detailedPlaceResult.geometry.location.lat, detailedPlaceResult.geometry.location.lng, detailedPlaceResult.formatted_address, detailedPlaceResult.place_id, detailedPlaceResult.opening_hours.open_now, detailedPlaceResult.opening_hours.weekday_text, detailedPlaceResult.price_level, detailedPlaceResult.rating )
+var detailedTotie1 = new DetailedTotie( detailedPlaceResult.name, detailedPlaceResult.geometry.location.lat, detailedPlaceResult.geometry.location.lng, detailedPlaceResult.formatted_address, detailedPlaceResult.formatted_phone_number, detailedPlaceResult.place_id, detailedPlaceResult.opening_hours.open_now, detailedPlaceResult.opening_hours.weekday_text, detailedPlaceResult.price_level, detailedPlaceResult.rating )
 
-var detailedTotie2 = new DetailedTotie( detailedPlaceResultTwo.name, detailedPlaceResultTwo.geometry.location.lat, detailedPlaceResultTwo.geometry.location.lng, detailedPlaceResultTwo.formatted_address, detailedPlaceResultTwo.place_id, detailedPlaceResultTwo.opening_hours.open_now, detailedPlaceResultTwo.opening_hours.weekday_text, detailedPlaceResultTwo.price_level )
+var detailedTotie2 = new DetailedTotie( detailedPlaceResultTwo.name, detailedPlaceResultTwo.geometry.location.lat, detailedPlaceResultTwo.geometry.location.lng, detailedPlaceResultTwo.formatted_address, detailedPlaceResultTwo.formatted_phone_number, detailedPlaceResultTwo.place_id, detailedPlaceResultTwo.opening_hours.open_now, detailedPlaceResultTwo.opening_hours.weekday_text, detailedPlaceResultTwo.price_level )
 
 describe("Detailed Totie", function(){
   it("should be able to store a name", function(){
@@ -95,6 +95,10 @@ describe("Detailed Totie", function(){
   it("should store an address", function(){
     assert.equal("20 Princes Street, Edinburgh EH1 1HT, United Kingdom", detailedTotie1.address);
   });
+
+  it("should store a phone number", function(){
+    assert.equal("0131 4431212", detailedTotie1.phoneNumber)
+  })
 
   it("should store a place id", function(){
     assert.equal("1234", detailedTotie1.placeId);
@@ -132,5 +136,6 @@ describe("Detailed Totie", function(){
     assert.equal(3.5, detailedTotie1.rating);
   });
 
+  
 
 })
