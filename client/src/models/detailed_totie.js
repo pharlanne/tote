@@ -1,7 +1,7 @@
 
 
 
-var DetailedTotie = function(name, lat, lng, address, phoneNumber, placeId, openNow, openingHours, priceLevel, rating, reviews){
+var DetailedTotie = function(name, lat, lng, address, phoneNumber, placeId, openNow, openingHours, priceLevel, rating, reviews, website){
   this.name = name, 
   this.location = {
     lat: lat, 
@@ -14,7 +14,8 @@ var DetailedTotie = function(name, lat, lng, address, phoneNumber, placeId, open
   this.allOpeningHours = openingHours,
   this.priceLevel = priceLevel,
   this.rating = rating,
-  this.reviews = reviews
+  this.reviews = reviews, 
+  this.website = website
 
 }
 
