@@ -39,6 +39,7 @@ DetailedTotie.prototype = {
   },
   addComment: function(input){
     var comment = {
+      id: this.comments.length + 1, 
       text: input
     };
     this.comments.push(comment);
@@ -48,7 +49,7 @@ DetailedTotie.prototype = {
     this.comments.forEach(function(commentObject){
       result.push(commentObject.text)
     })
-    return result
+    return result;
   }
 
 }
