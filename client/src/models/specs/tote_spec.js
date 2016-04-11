@@ -183,12 +183,17 @@ describe("tote", function(){
 
   it("should be initialzed with an empty cities holder", function(){
     assert.deepEqual([], tote1.cities);
-  })
+  });
 
   it("should be able to add a city", function(){
-    tote1.addCity(cityOne)
-    assert.deepEqual([cityOne], tote1.cities)
-  })
+    tote1.addCity(cityOne);
+    assert.deepEqual([cityOne], tote1.cities);
+  });
+
+  it("should be able to hold more than one city", function(){
+    tote1.addCity(cityTwo);
+    assert.deepEqual([cityOne, cityTwo], tote1.cities);
+  });
 
 
 
