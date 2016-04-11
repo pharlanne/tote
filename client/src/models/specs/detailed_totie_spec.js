@@ -166,6 +166,8 @@ describe("Detailed Totie", function(){
     assert.deepEqual(["This looks like a nice and cheap place to eat?", "Need to check if they do vegen and gluten free"], detailedTotie1.getAllComments())
   })
 
-  it("should be able to  com")
+  it("should be able to return a specific comment with a given id", function(){
+    assert.deepEqual("Need to check if they do vegen and gluten free", detailedTotie1.getComment(2))
+  })
 
 })

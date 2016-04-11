@@ -50,6 +50,15 @@ DetailedTotie.prototype = {
       result.push(commentObject.text)
     })
     return result;
+  }, 
+  getComment: function(inputtedId){
+    var result = "";
+    this.comments.forEach(function(commentObject){
+      if(commentObject.id === Number(inputtedId)){
+        result = commentObject.text;
+      };
+    });
+    return result;
   }
 
 }
