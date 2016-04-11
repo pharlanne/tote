@@ -137,18 +137,25 @@ describe("Detailed Totie", function(){
   });
 
   it("should be able to store reviews", function(){
-    assert.deepEqual( 2, detailedTotie1.reviews.length)
-  })
+    assert.deepEqual( 2, detailedTotie1.reviews.length);
+  });
   
   it("should be able to return reviews in text form", function(){
-    assert.deepEqual( ["Very good", "Decent"], detailedTotie1.getAllReviewsText() )
-  })
+    assert.deepEqual( ["Very good", "Decent"], detailedTotie1.getAllReviewsText());
+  });
   
   it("should be able to store the website", function(){
-    assert.equal("https://www.jdwetherspoon.com/pubs/all-pubs/scotland/edinburgh/the-standing-order-edinburgh", detailedTotie1.website)
-  })
+    assert.equal("https://www.jdwetherspoon.com/pubs/all-pubs/scotland/edinburgh/the-standing-order-edinburgh", detailedTotie1.website);
+  });
   
   it("should have a comments holder which is empty at the start", function(){
-    assert.deepEqual([], detailedTotie1.comments)
+    assert.deepEqual([], detailedTotie1.comments);
+  });
+
+  it("should be able to add commments", function(){
+    detailedTotie1.addComment("This looks like a nice and cheap place to eat?");
+    assert.deepEqual([{"text": "This looks like a nice and cheap place to eat?"}], detailedTotie1.comments)
   })
+
+
 })

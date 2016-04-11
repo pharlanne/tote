@@ -36,6 +36,12 @@ DetailedTotie.prototype = {
       result.push(review.text);
     }
     return result;
+  },
+  addComment: function(input){
+    var comment = {
+      text: input
+    };
+    this.comments.push(comment);
   }
 
 }
