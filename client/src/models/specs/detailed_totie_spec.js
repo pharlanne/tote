@@ -187,9 +187,9 @@ describe("Detailed Totie", function(){
     assert.equal(undefined, detailedTotie1.getCommentIndex(3))
   })
 
-  // it("should be able to remove a comment for given id", function(){
-  //   detailedTotie1.addComment("This is a lovely looking bar!");
-  //   detailedTotie1.removeComment(3);
-  //   assert.deepEqual(["This looks like a nice and cheap place to eat?", "Need to check if they do vegen and gluten free"], detailedTotie1.getAllComments())
-  // })
+  it("should be able to remove a comment for given id", function(){
+    detailedTotie1.addComment("This is a lovely looking bar!");
+    detailedTotie1.removeComment(3);
+    assert.deepEqual(["This looks like a cheap place to eat.", "Need to check if they do vegen and gluten free"], detailedTotie1.getAllComments())
+  })
 })

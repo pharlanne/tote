@@ -73,12 +73,13 @@ DetailedTotie.prototype = {
       if(commentObject.id === Number(inputtedId)){
         result = this.comments.indexOf(commentObject);
       }
-    }.bind(this))
+    }.bind(this));
     return result;
+  },
+  removeComment: function(inputtedId){
+    var index = this.getCommentIndex(inputtedId);
+    this.comments.splice(index, 1);
   }
-  // removeComment: function(inputtedId){
-
-  // }
 
 }
 
