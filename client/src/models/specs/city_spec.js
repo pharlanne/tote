@@ -178,15 +178,21 @@ describe("city", function(){
 
   it("should be able to return a specific totie for a given name", function(){
     assert.deepEqual(detailedTotie2, cityOne.getTotie("All Bar One"));
-  })
+  });
 
   it("should be able to return multiple toties for a given type", function(){
-    assert.deepEqual([detailedTotie1, detailedTotie2], cityOne.getTotiesType("bar"))
-  })
+    assert.deepEqual([detailedTotie1, detailedTotie2], cityOne.getTotiesType("bar"));
+  });
 
   it("should be able to return a single totie for a given type", function(){
-    assert.deepEqual([detailedTotie3], cityOne.getTotiesType("supermarket"))
-  })
+    assert.deepEqual([detailedTotie3], cityOne.getTotiesType("supermarket"));
+  });
+
+  it("shoule return null if no toties with given type exist", function(){
+    assert.equal(null, cityOne.getTotiesType("hotel"));
+  });
+
+
 
 
 

@@ -30,10 +30,16 @@ City.prototype = {
       totie.types.forEach(function(type){
         if(type === searchQuery){
           results.push(totie);
-        }
+        } 
       }.bind(this))
     }.bind(this))
-    return results;
+    
+    if(results.length > 0 ){
+      return results;
+    } else {
+      return null
+    }
+    
   }
 
 
