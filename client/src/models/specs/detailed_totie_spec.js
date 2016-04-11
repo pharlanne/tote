@@ -170,4 +170,7 @@ describe("Detailed Totie", function(){
     assert.deepEqual("Need to check if they do vegen and gluten free", detailedTotie1.getComment(2))
   })
 
+  it("should be able to return a specific comment even if given id is a string", function(){
+    assert.deepEqual("This looks like a nice and cheap place to eat?", detailedTotie1.getComment("1"))
+  })
 })
