@@ -40,7 +40,7 @@ var detailedPlaceResult = {
 }
 
 
-var detailedTotie1 = new DetailedTotie( detailedPlaceResult.name, detailedPlaceResult.geometry.location.lat, detailedPlaceResult.geometry.location.lng, detailedPlaceResult.formatted_address, detailedPlaceResult.place_id, detailedPlaceResult.opening_hours.open_now, detailedPlaceResult.opening_hours.weekday_text )
+var detailedTotie1 = new DetailedTotie( detailedPlaceResult.name, detailedPlaceResult.geometry.location.lat, detailedPlaceResult.geometry.location.lng, detailedPlaceResult.formatted_address, detailedPlaceResult.place_id, detailedPlaceResult.opening_hours.open_now, detailedPlaceResult.opening_hours.weekday_text, detailedPlaceResult.price_level )
 
 describe("Detailed Totie", function(){
   it("should be able to store a name", function(){
@@ -79,7 +79,9 @@ describe("Detailed Totie", function(){
     assert.deepEqual(["Wednesday: 11:00 AM - 1:00 AM"], detailedTotie1.getOpeningHours("Wednesday"));
   });
 
-  it("should return multiple")
+  it("should be return undefined if price level is not present", function(){
+    assert.equal(undefined, detailedTotie1.priceLevel)
+  })
 
 
 })
