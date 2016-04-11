@@ -33,13 +33,16 @@ City.prototype = {
         } 
       }.bind(this))
     }.bind(this))
-    
+
     if(results.length > 0 ){
       return results;
     } else {
       return null
     }
-    
+  },
+  getTotieIndex: function(searchQuery){
+    var totie = this.getTotie(searchQuery)
+    return this.toties.indexOf(totie)
   }
 
 

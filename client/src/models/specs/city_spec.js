@@ -188,9 +188,17 @@ describe("city", function(){
     assert.deepEqual([detailedTotie3], cityOne.getTotiesType("supermarket"));
   });
 
-  it("shoule return null if no toties with given type exist", function(){
+  it("should return null if no toties with given type exist", function(){
     assert.equal(null, cityOne.getTotiesType("hotel"));
   });
+
+  it("should be able to find a toties index for a given totie name", function(){
+    assert.equal(1, cityOne.getTotieIndex("All Bar One"))
+  })
+  // it("should be able to remove a specific totie", function(){
+  //   cityOne.removeTotie("Marks and Spencers")
+  //   assert.deepEqual([detailedTotie1, detailedTotie2])
+  // })
 
 
 
