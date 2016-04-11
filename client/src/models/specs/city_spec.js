@@ -184,6 +184,10 @@ describe("city", function(){
     assert.deepEqual([detailedTotie1, detailedTotie2], cityOne.getTotiesType("bar"))
   })
 
+  it("should be able to return a single totie for a given type", function(){
+    assert.deepEqual([detailedTotie3], cityOne.getTotiesType("supermarket"))
+  })
+
 
 
 
