@@ -120,9 +120,9 @@ var detailedPlaceResultThree = {
 
 var detailedTotie1 = new DetailedTotie( detailedPlaceResult.name, detailedPlaceResult.geometry.location.lat, detailedPlaceResult.geometry.location.lng, detailedPlaceResult.formatted_address, detailedPlaceResult.formatted_phone_number, detailedPlaceResult.place_id, detailedPlaceResult.opening_hours.open_now, detailedPlaceResult.opening_hours.weekday_text, detailedPlaceResult.price_level, detailedPlaceResult.rating, detailedPlaceResult.reviews, detailedPlaceResult.types, detailedPlaceResult.website )
 
-var detailedTotie2 = new DetailedTotie( detailedPlaceResultTwo.name, detailedPlaceResultTwo.geometry.location.lat, detailedPlaceResultTwo.geometry.location.lng, detailedPlaceResultTwo.formatted_address, detailedPlaceResultTwo.formatted_phone_number, detailedPlaceResultTwo.place_id, detailedPlaceResultTwo.opening_hours.open_now, detailedPlaceResultTwo.opening_hours.weekday_text, detailedPlaceResultTwo.price_level )
+var detailedTotie2 = new DetailedTotie( detailedPlaceResultTwo.name, detailedPlaceResultTwo.geometry.location.lat, detailedPlaceResultTwo.geometry.location.lng, detailedPlaceResultTwo.formatted_address, detailedPlaceResultTwo.formatted_phone_number, detailedPlaceResultTwo.place_id, detailedPlaceResult.opening_hours.open_now, detailedPlaceResultTwo.opening_hours.weekday_text, detailedPlaceResultTwo.price_level, detailedPlaceResultTwo.rating, detailedPlaceResultTwo.reviews, detailedPlaceResultTwo.types, detailedPlaceResultTwo.website )
 
-var detailedTotie3 = new DetailedTotie( detailedPlaceResultThree.name, detailedPlaceResultThree.geometry.location.lat, detailedPlaceResultThree.geometry.location.lng, detailedPlaceResultThree.formatted_address, detailedPlaceResultThree.formatted_phone_number, detailedPlaceResultThree.place_id, detailedPlaceResultThree.opening_hours.open_now, detailedPlaceResultThree.opening_hours.weekday_text, detailedPlaceResultThree.price_level )
+var detailedTotie3 = new DetailedTotie( detailedPlaceResultThree.name, detailedPlaceResultThree.geometry.location.lat, detailedPlaceResultThree.geometry.location.lng, detailedPlaceResultThree.formatted_address, detailedPlaceResultThree.formatted_phone_number, detailedPlaceResultThree.place_id, detailedPlaceResultThree.opening_hours.open_now, detailedPlaceResultThree.opening_hours.weekday_text, detailedPlaceResultThree.price_level, detailedPlaceResultThree.rating, detailedPlaceResultThree.reviews, detailedPlaceResultThree.types, detailedPlaceResultThree.website )
 
 
 
@@ -178,19 +178,30 @@ describe("city", function(){
 
   it("should be able to return a specific totie for a given name", function(){
     assert.deepEqual(detailedTotie2, cityOne.getTotie("All Bar One"));
+  });
+
+  it("should be able to return multiple toties for a given type", function(){
+    assert.deepEqual([detailedTotie1, detailedTotie2], cityOne.getTotiesType("bar"));
+  });
+
+  it("should be able to return a single totie for a given type", function(){
+    assert.deepEqual([detailedTotie3], cityOne.getTotiesType("supermarket"));
+  });
+
+  it("should return null if no toties with given type exist", function(){
+    assert.equal(null, cityOne.getTotiesType("hotel"));
+  });
+
+  it("should be able to find a toties index for a given totie name", function(){
+    assert.equal(1, cityOne.getTotieIndex("All Bar One"))
   })
 
-  it("should be able to loop over types array and check if it contains a given item", function(){
-    assert.equal(true, cityOne.checkTypes(detailedTotie1, "bar"))
+  it("should be able to remove a specific totie", function(){
+    cityOne.removeTotie("Marks and Spencers")
+    assert.deepEqual([detailedTotie1, detailedTotie2], cityOne.toties)
   })
 
-  it("should return false if types array does not contain given item", function(){
-    assert.equal(false, cityOne.checkTypes(detailedTotie1, "supermarket"))
-  })
 
-  // it("should be able to return multiple toties for a given type", function(){
-  //   assert.deepEqual([])
-  // })
 
 
 

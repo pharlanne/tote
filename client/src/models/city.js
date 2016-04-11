@@ -24,13 +24,35 @@ City.prototype = {
     })
     return result;
   }, 
-  checkTypes: function(totie, searchQuery){
-    var result;
-    totie.types.some(function(type){
-      result = type.includes(searchQuery);
-    })
-    return result;
+
+  getTotiesType: function(searchQuery){
+    var results = [];
+    this.toties.forEach(function(totie){
+      totie.types.forEach(function(type){
+        if(type === searchQuery){
+          results.push(totie);
+        } 
+      }.bind(this))
+    }.bind(this))
+
+    if(results.length > 0 ){
+      return results;
+    } else {
+      return null
+    }
+  },
+  getTotieIndex: function(searchQuery){
+    var totie = this.getTotie(searchQuery)
+    return this.toties.indexOf(totie)
+  },
+  removeTotie: function(searchQuery){
+    var index = this.getTotieIndex(searchQuery);
+    this.toties.splice(index,1)
   }
+
+
+
+
 }
 
 
