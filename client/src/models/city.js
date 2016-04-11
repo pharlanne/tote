@@ -24,13 +24,20 @@ City.prototype = {
     })
     return result;
   }, 
-  checkTypes: function(totie, searchQuery){
-    var result;
-    totie.types.some(function(type){
-      result = type.includes(searchQuery);
-    })
-    return result;
+  getTotiesType: function(searchQuery){
+    var results = [];
+    this.toties.forEach(function(totie){
+      totie.types.forEach(function(type){
+        if(type === searchQuery){
+          results.push(totie);
+        }
+      }.bind(this))
+    }.bind(this))
+    return results;
   }
+
+
+
 }
 
 
