@@ -7,7 +7,8 @@ var City = function(params){
   this.location = {
     lat: params["lat"],
     lng: params["lng"]
-  }
+  }, 
+  this.toties = []
 }
 
 
