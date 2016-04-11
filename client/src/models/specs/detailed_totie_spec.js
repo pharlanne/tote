@@ -40,7 +40,7 @@ var detailedPlaceResult = {
 }
 
 
-var detailedTotie1 = new DetailedTotie(detailedPlaceResult.name, detailedPlaceResult.geometry.location.lat, detailedPlaceResult.geometry.location.lng, detailedPlaceResult.formatted_address, detailedPlaceResult.place_id )
+var detailedTotie1 = new DetailedTotie( detailedPlaceResult.name, detailedPlaceResult.geometry.location.lat, detailedPlaceResult.geometry.location.lng, detailedPlaceResult.formatted_address, detailedPlaceResult.place_id, detailedPlaceResult.opening_hours.open_now )
 
 describe("Detailed Totie", function(){
   it("should be able to store a name", function(){
@@ -52,13 +52,16 @@ describe("Detailed Totie", function(){
   });
 
   it("should store an address", function(){
-    assert.equal("20 Princes Street, Edinburgh EH1 1HT, United Kingdom", detailedTotie1.address)
-  })
+    assert.equal("20 Princes Street, Edinburgh EH1 1HT, United Kingdom", detailedTotie1.address);
+  });
 
   it("should store a place id", function(){
-    assert.equal("1234", detailedTotie1.placeId)
-  })
+    assert.equal("1234", detailedTotie1.placeId);
+  });
 
+  it("should store whether it is open now or not", function(){
+    assert.equal(true, detailedTotie1.openNow)
+  })
 
 
 
