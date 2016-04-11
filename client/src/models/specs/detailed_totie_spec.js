@@ -148,4 +148,7 @@ describe("Detailed Totie", function(){
     assert.equal("https://www.jdwetherspoon.com/pubs/all-pubs/scotland/edinburgh/the-standing-order-edinburgh", detailedTotie1.website)
   })
   
+  it("should have a comments holder which is empty at the start", function(){
+    assert.deepEqual([], detailedTotie1.comments)
+  })
 })

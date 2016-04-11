@@ -15,7 +15,8 @@ var DetailedTotie = function(name, lat, lng, address, phoneNumber, placeId, open
   this.priceLevel = priceLevel,
   this.rating = rating,
   this.reviews = reviews, 
-  this.website = website
+  this.website = website,
+  this.comments = []
 
 }
 
