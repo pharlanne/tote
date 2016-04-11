@@ -168,7 +168,12 @@ describe("city", function(){
   it("should be able to add a totie", function(){
     cityOne.addTotie(detailedTotie1);
     assert.deepEqual([detailedTotie1], cityOne.toties)
+  })
 
+  it("should be able to hold more than one totie", function(){
+    cityOne.addTotie(detailedTotie2);
+    cityOne.addTotie(detailedTotie3);
+    assert.deepEqual([detailedTotie1, detailedTotie2, detailedTotie3], cityOne.toties)
   })
 
 
