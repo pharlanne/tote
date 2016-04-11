@@ -1,8 +1,9 @@
 
 
 
-var Tote = function(name){
-  this.name = name;
+var Tote = function(title){
+  this.title = title;
+  this.cities = [];
 }
 
 

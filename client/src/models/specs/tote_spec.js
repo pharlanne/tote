@@ -177,9 +177,13 @@ cityTwo.addTotie(detailedTotie3);
 var tote1 = new Tote("World Wish List")
 
 describe("tote", function(){
-  it("should have a name", function(){
-    assert.equal("World Wish List", tote1.name);
+  it("should have a title", function(){
+    assert.equal("World Wish List", tote1.title);
   });
+
+  it("should be initialzed with an empty cities holder", function(){
+    assert.deepEqual([], tote1.cities);
+  })
 
 
 
