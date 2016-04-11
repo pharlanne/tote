@@ -75,7 +75,7 @@ var detailedPlaceResultTwo = {
       text: "Food was awful"
     }
   ],
-  types: ["restaurant", "bar", "food"],
+  types: ["bar", "food"],
   website: "www.allbarone.co.uk",
 }
 
@@ -173,12 +173,22 @@ describe("city", function(){
   it("should be able to hold more than one totie", function(){
     cityOne.addTotie(detailedTotie2);
     cityOne.addTotie(detailedTotie3);
-    assert.deepEqual([detailedTotie1, detailedTotie2, detailedTotie3], cityOne.toties)
+    assert.deepEqual([detailedTotie1, detailedTotie2, detailedTotie3], cityOne.toties);
   })
 
   it("should be able to return a specific totie for a given name", function(){
-    assert.deepEqual(detailedTotie2, cityOne.getTotie("All Bar One"))
+    assert.deepEqual(detailedTotie2, cityOne.getTotie("All Bar One"));
   })
+
+  it("should be able to loop over types array and check if it contains a given item", function(){
+    assert.equal(true, cityOne.checkTypes(detailedTotie1, "bar"))
+  })
+
+  // it("should be able to return multiple toties for a given type", function(){
+  //   assert.deepEqual([])
+  // })
+
+
 
 
 
