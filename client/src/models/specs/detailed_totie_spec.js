@@ -40,7 +40,7 @@ var detailedPlaceResult = {
 }
 
 
-var detailedTotie1 = new DetailedTotie(detailedPlaceResult.name, detailedPlaceResult.geometry.location.lat, detailedPlaceResult.geometry.location.lng )
+var detailedTotie1 = new DetailedTotie(detailedPlaceResult.name, detailedPlaceResult.geometry.location.lat, detailedPlaceResult.geometry.location.lng, detailedPlaceResult.formatted_address )
 
 describe("Detailed Totie", function(){
   it("should be able to store a name", function(){
@@ -48,7 +48,11 @@ describe("Detailed Totie", function(){
   });
 
   it("should be able to store a latitude and longitude as an object", function(){
-    assert.deepEqual({lat: 39, lng:87}, detailedTotie1.location)
+    assert.deepEqual({lat: 39, lng:87}, detailedTotie1.location);
+  });
+
+  it("should store an address", function(){
+    assert.equal("20 Princes Street, Edinburgh EH1 1HT, United Kingdom", detailedTotie1.address)
   })
 
 
