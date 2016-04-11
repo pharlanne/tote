@@ -26,10 +26,8 @@ City.prototype = {
   }, 
   checkTypes: function(totie, searchQuery){
     var result;
-    totie.types.forEach(function(type){
-      if(type.includes(searchQuery.toString())){
-        result = true;
-      }
+    totie.types.some(function(type){
+      result = type.includes(searchQuery);
     })
     return result;
   }

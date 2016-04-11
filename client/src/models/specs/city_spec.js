@@ -184,6 +184,10 @@ describe("city", function(){
     assert.equal(true, cityOne.checkTypes(detailedTotie1, "bar"))
   })
 
+  it("should return false if types array does not contain given item", function(){
+    assert.equal(false, cityOne.checkTypes(detailedTotie1, "supermarket"))
+  })
+
   // it("should be able to return multiple toties for a given type", function(){
   //   assert.deepEqual([])
   // })
