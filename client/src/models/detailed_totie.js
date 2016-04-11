@@ -1,13 +1,14 @@
 
 
 
-var DetailedTotie = function(name, lat, lng, address){
+var DetailedTotie = function(name, lat, lng, address, placeId){
   this.name = name, 
   this.location = {
     lat: lat, 
     lng: lng
   }, 
-  this.address = address
+  this.address = address, 
+  this.placeId = placeId
 
 }
 
