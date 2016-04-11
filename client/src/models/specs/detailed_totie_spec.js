@@ -157,5 +157,13 @@ describe("Detailed Totie", function(){
     assert.deepEqual([{"text": "This looks like a nice and cheap place to eat?"}], detailedTotie1.comments)
   })
 
+  it("should be able to hold more than one comment", function(){
+    detailedTotie1.addComment("Need to check if they do vegen and gluten free");
+    assert.deepEqual([{"text": "This looks like a nice and cheap place to eat?"}, {"text": "Need to check if they do vegen and gluten free"}], detailedTotie1.comments)
+  })
+
+  // it("should be able to return comments as text only", function(){
+  //   assert.equal("This looks like a nice and cheap place to eat?", detailedTotie1.getAllCommen)
+  // })
 
 })
