@@ -60,16 +60,13 @@ DetailedTotie.prototype = {
     });
     return result[0].text;
   }, 
-  // updateComment: function(inputtedId, updateText){
-  //   var comment = this.getComment(inputtedId);
-  //   comment = updateText;
-
-  //   this.comments.forEach(function(commentObject){
-  //     if(commentObject.id === Number(inputtedId){
-  //       commentObject.text = comment
-  //     })
-  //   })
-  // }
+  updateComment: function(inputtedId, newText){
+    this.comments.forEach(function(commentObject){
+      if(commentObject.id === Number(inputtedId)){
+        commentObject.text = newText;
+      };
+    });
+  }
 
 }
 
