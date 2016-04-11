@@ -17,7 +17,9 @@ var cityGoogleObject = {
 
 params = {
   "name": cityGoogleObject.address_components[0].long_name,
-  "country": cityGoogleObject.address_components[1].long_name
+  "country": cityGoogleObject.address_components[1].long_name,
+  "lat": cityGoogleObject.geometry.location.lat, 
+  "lng": cityGoogleObject.geometry.location.lng
 }
 
 var cityOne = new City( params );
@@ -31,8 +33,9 @@ describe("city", function(){
     assert.equal("United States of America", cityOne.country)
   })
 
-
-
+  it("should have a location as an object", function(){
+    assert.deepEqual({lat: 40.7142700, lng: -74.0059700 }, cityOne.location)
+  })
 
 
 })
