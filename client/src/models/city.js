@@ -43,7 +43,12 @@ City.prototype = {
   getTotieIndex: function(searchQuery){
     var totie = this.getTotie(searchQuery)
     return this.toties.indexOf(totie)
+  },
+  removeTotie: function(searchQuery){
+    var index = this.getTotieIndex(searchQuery);
+    this.toties.splice(index,1)
   }
+
 
 
 

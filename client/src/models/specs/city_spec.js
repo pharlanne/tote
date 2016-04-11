@@ -195,10 +195,11 @@ describe("city", function(){
   it("should be able to find a toties index for a given totie name", function(){
     assert.equal(1, cityOne.getTotieIndex("All Bar One"))
   })
-  // it("should be able to remove a specific totie", function(){
-  //   cityOne.removeTotie("Marks and Spencers")
-  //   assert.deepEqual([detailedTotie1, detailedTotie2])
-  // })
+
+  it("should be able to remove a specific totie", function(){
+    cityOne.removeTotie("Marks and Spencers")
+    assert.deepEqual([detailedTotie1, detailedTotie2], cityOne.toties)
+  })
 
 
 
