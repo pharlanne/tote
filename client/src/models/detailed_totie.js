@@ -52,14 +52,24 @@ DetailedTotie.prototype = {
     return result;
   }, 
   getComment: function(inputtedId){
-    var result = "";
+    var result = [];
     this.comments.forEach(function(commentObject){
       if(commentObject.id === Number(inputtedId)){
-        result = commentObject.text;
+        result.push(commentObject);
       };
     });
-    return result;
-  }
+    return result[0].text;
+  }, 
+  // updateComment: function(inputtedId, updateText){
+  //   var comment = this.getComment(inputtedId);
+  //   comment = updateText;
+
+  //   this.comments.forEach(function(commentObject){
+  //     if(commentObject.id === Number(inputtedId){
+  //       commentObject.text = comment
+  //     })
+  //   })
+  // }
 
 }
 
