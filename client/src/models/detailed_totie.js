@@ -14,7 +14,18 @@ var DetailedTotie = function(name, lat, lng, address, placeId, openNow, openingH
 
 }
 
+DetailedTotie.prototype = {
+  getOpeningHours: function(day){
+    var result = [];
+    this.allOpeningHours.forEach(function(dayOpeningHours){
+      if (dayOpeningHours.includes(day)){
+        result.push(dayOpeningHours)
+      }
+    })
+  return result
+  }
 
+}
 
 
 

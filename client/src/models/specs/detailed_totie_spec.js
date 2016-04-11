@@ -75,5 +75,11 @@ describe("Detailed Totie", function(){
     ], detailedTotie1.allOpeningHours )
   })
 
+  it("should be able to return a given days opening hours", function(){
+    assert.deepEqual(["Wednesday: 11:00 AM - 1:00 AM"], detailedTotie1.getOpeningHours("Wednesday"));
+  });
+
+  it("should return multiple")
+
 
 })
