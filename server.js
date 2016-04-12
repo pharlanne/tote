@@ -13,6 +13,22 @@ app.get("/", function(req, res){
   res.sendFile(path.join(__dirname + "/client/build/index.html"));
 });
 
+app.get("/totes", function(req, res){
+
+  MongoClient.connect(dataBaseURL, function(err, db){
+    var totes = db.listCollections();
+    // console.log(totes)
+    totes.toArray(function(err, docs){
+      res.json(docs);
+      db.close;
+    })
+    
+    
+  })
+})
+
+
+
 app.post("/new", function(req, res){
   console.log(req.body)
 
@@ -26,6 +42,8 @@ app.post("/new", function(req, res){
   })
 
 })
+
+app.post("/")
 
 
 app.use(express.static("client/build"));
