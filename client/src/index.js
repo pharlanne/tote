@@ -1,4 +1,4 @@
-var Landing = require('./landing.js');
+var Landing = require('./landing.js')
 
 
 window.onload = function(){
