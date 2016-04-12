@@ -1,8 +1,9 @@
-// var Landing = require('./landing.js')
-var places
+var Landing = require('./landing.js');
+
 
 window.onload = function(){
-  console.log("tote app started")
+  console.log("hi")
+  
   var landing = new Landing();
   landing.execute();
 

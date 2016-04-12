@@ -1,4 +1,4 @@
-var Map = require('./resultMap.js');
+var Map = require('./views/placespractice.js');
 var Tote = require('./models/tote.js');
 var City = require('./models/city.js')
 
