@@ -58,7 +58,18 @@ app.post("/new", function(req, res){
 
 })
 
-app.post("/")
+app.post("/totes/single/update", function(req, res){
+  
+  MongoClient.connect(dataBaseURL, function(err, db){
+    var collection = db.collection("DreamTrip");//this wont be hardcoded 
+    collection.update({name: "Paris"}, {$set:req.body});
+    res.status(200).end();
+    db.close;
+
+  })
+
+
+})
 
 
 app.use(express.static("client/build"));
