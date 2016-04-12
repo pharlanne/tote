@@ -1,14 +1,14 @@
-var express = require('server.js');
+var express = require('express');
 var app = express();
 var path = require('path');
 var MongoClient = require('mongodb').MongoClient;
 var bodyParser = require('body-parser');
-var dataBaseURL = 'mongodb://localhost:27017/'
+var dataBaseURL = 'mongodb://localhost:27017/MyTotes'
 
 app.use(bodyParser.json());
 
 app.get("/", function(req, res){
-  res.sendFile(path.join(__dirname + "client/build/index.html"));
+  res.sendFile(path.join(__dirname + "/client/build/index.html"));
 });
 
 
