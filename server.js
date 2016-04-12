@@ -5,11 +5,27 @@ var MongoClient = require('mongodb').MongoClient;
 var bodyParser = require('body-parser');
 var dataBaseURL = 'mongodb://localhost:27017/MyTotes'
 
+var Tote = require('./client/src/models/tote.js')
+
 app.use(bodyParser.json());
 
 app.get("/", function(req, res){
   res.sendFile(path.join(__dirname + "/client/build/index.html"));
 });
+
+app.post("/new", function(req, res){
+  console.log(req.body)
+
+  MongoClient.connect(dataBaseURL, function(err, db){
+    
+    var tote = new Tote(req.body.value)
+    console.log(tote)
+    db.createCollection(req.body.value);
+    res.status(200).end();
+    db.close();
+  })
+
+})
 
 
 app.use(express.static("client/build"));

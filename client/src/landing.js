@@ -15,9 +15,10 @@ var Landing = function(){
      box.appendChild(createTrip);
      box.appendChild(viewTrips);
 
-     title.placeholder = 'Enter Trip Title';
-     title.id = 'title';
-
+      title.placeholder = 'Enter Trip Title';
+      title.id = 'title';
+      
+     
 
      destination.id = 'destination'
 
@@ -27,6 +28,7 @@ var Landing = function(){
     var autocomplete = new google.maps.places.Autocomplete(destination);
 
     createTrip.addEventListener('click', function(){
+
         var map = new Map;
         map.initMap();
         console.log("hello")
