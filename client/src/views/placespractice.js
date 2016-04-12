@@ -2,7 +2,8 @@ var map;
 var infoWindow;
 var service;
 var marker;
-var displayMap = document.getElementById('displayMap')
+var mapList = document.getElementById('mapList')
+
 
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
@@ -44,6 +45,7 @@ function initMap() {
       }else {
           alert('Geocode was not successful for the following reason: ' + status);
         }
+
       });
     }
 
@@ -59,7 +61,7 @@ function initMap() {
  
 
 
-
+//news up the elements for the icon menus
     var hotels = document.createElement('img');
     var bars = document.createElement('img');
     var restaurants = document.createElement('img');
@@ -67,7 +69,9 @@ function initMap() {
     var events = document.createElement('img');
     var shopping = document.createElement('img')
     var paste = document.getElementById('icons')
+    paste.innerHTML = "";
 
+   
 
     paste.appendChild(hotels);
     paste.appendChild(bars);
@@ -103,18 +107,19 @@ function initMap() {
     });
 
 
-  // map.addListener('idle', performSearch);
-  // performSearch()
 }
 
 function performSearch(category) {
+  
   var request = {
     location: map.getCenter(),
     // bounds: map.getBounds(),
     keyword: category,
     radius: 5000
   };
+  
   service.radarSearch(request, callback);
+
 }
 
 
@@ -123,39 +128,35 @@ function callback(results, status) {
     console.error(status);
     return;
   }
+
+  displayMap = document.getElementById('mapList')
+  displayMap.innerHTML = "";
   for (var i = 0, result; result = results[i]; i++) {
-    listResult(result);
+    listResult(result, displayMap);
+    if(i===9) {break};
+
   }
 }
 
 
-  function listResult(place){
+  function listResult(place, displayMap){
   service.getDetails(place, function(result, status) {
     if (status !== google.maps.places.PlacesServiceStatus.OK) {
-    console.error(status);
-            return;
-          }
-       
-    var displayMap = document.getElementById('mapList')
-
+      console.error(status);
+      return;
+    }
     var ul = document.createElement('ul'); 
     var li = document.createElement('li');
-
-
     var photoUrl = result.photos[0].getUrl({'maxWidth': 35, 'maxHeight' : 35});
     var image = document.createElement('img')
     image.src = photoUrl
-
     li.innerText = result.name + " " + result.rating ;
     console.log(result)
-
     displayMap.appendChild(ul);
     ul.appendChild(li);
     li.appendChild(image)
- 
 
   })
-
   }
 
 function addMarker(place) {
@@ -183,6 +184,4 @@ function addMarker(place) {
     });
   });
 }
-
-
 
