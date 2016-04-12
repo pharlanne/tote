@@ -1,4 +1,6 @@
 var initMap = require('./resultMap.js');
+var Tote = require('./models/tote.js');
+var City = require('./models/city.js')
 
 function landing(){
   var box = document.getElementById('main');
@@ -25,6 +27,8 @@ function landing(){
 
   createTrip.addEventListener('click', function(){
       initMap();
+      console.log("hello")
+      console.log(document.getElementById("title"))
      
   })
 
