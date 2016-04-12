@@ -18,15 +18,30 @@ app.get("/totes", function(req, res){
   MongoClient.connect(dataBaseURL, function(err, db){
     var totes = db.listCollections();
     // console.log(totes)
+
     totes.toArray(function(err, docs){
+      res.json(docs)
+      db.close;
+    })   
+  })
+})
+
+app.get("/totes/single", function(req, res){
+
+  MongoClient.connect(dataBaseURL, function(err, db){
+    if(err){
+      console.log(err);
+      return;
+    }
+    var collection = db.collection("DreamTrip");//this is what would be sent when user clicks specific 
+    //tote
+    collection.find({}).toArray(function(err, docs){
       res.json(docs);
       db.close;
     })
     
-    
   })
 })
-
 
 
 app.post("/new", function(req, res){
