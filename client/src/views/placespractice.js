@@ -2,7 +2,7 @@ var map;
 var infoWindow;
 var service;
 var marker;
-
+var displayMap = document.getElementById('displayMap')
 
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
