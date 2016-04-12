@@ -44,13 +44,12 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(1)
-	
+	var Landing = __webpack_require__(1)
 	
 	window.onload = function(){
 	  console.log("tote app started")
-	  landing();
-	
+	  var landing = new Landing();
+	  landing.execute();
 	
 	}
 	
@@ -60,41 +59,45 @@
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var initMap = __webpack_require__(2);
+	var Map = __webpack_require__(2);
 	var Tote = __webpack_require__(3);
 	var City = __webpack_require__(4)
 	
-	function landing(){
-	  var box = document.getElementById('main');
-	  var title = document.createElement('input');
-	  var destination = document.createElement('input');
-	  var createTrip = document.createElement('button');
-	  var viewTrips = document.createElement('button');
+	var Landing = function(){
+	  this.execute = function(){
+	    var box = document.getElementById('main');
+	    var title = document.createElement('input');
+	    var destination = document.createElement('input');
+	    var createTrip = document.createElement('button');
+	    var viewTrips = document.createElement('button');
 	
-	   box.appendChild(title);
-	   box.appendChild(destination);
-	   box.appendChild(createTrip);
-	   box.appendChild(viewTrips);
+	     box.appendChild(title);
+	     box.appendChild(destination);
+	     box.appendChild(createTrip);
+	     box.appendChild(viewTrips);
 	
-	   title.placeholder = 'Enter Trip Title';
-	   title.id = 'title';
+	     title.placeholder = 'Enter Trip Title';
+	     title.id = 'title';
 	
 	
-	   destination.id = 'destination'
+	     destination.id = 'destination'
 	
-	   createTrip.innerText= 'Create Trip'
-	   viewTrips.innerText= 'View Saved Trips'
+	     createTrip.innerText= 'Create Trip'
+	     viewTrips.innerText= 'View Saved Trips'
 	
-	  var autocomplete = new google.maps.places.Autocomplete(destination);
+	    var autocomplete = new google.maps.places.Autocomplete(destination);
 	
-	  createTrip.addEventListener('click', function(){
-	      initMap();
-	      console.log("hello")
-	      console.log(document.getElementById("title"))
-	     
-	  })
-	
+	    createTrip.addEventListener('click', function(){
+	        var map = new Map;
+	        map.initMap();
+	        console.log("hello")
+	        console.log(document.getElementById("title"))  
+	    })
+	  }
 	};
+	
+	
+	module.exports = Landing;
 
 /***/ },
 /* 2 */
@@ -105,8 +108,8 @@
 	var service;
 	var marker;
 	
-	
-	function initMap() {
+	var Map = function(){
+	  this.initMap = function() {
 	  map = new google.maps.Map(document.getElementById('map'), {
 	    center: {lat: 55.946969, lng: -3.202022},
 	    zoom: 10,
@@ -234,7 +237,12 @@
 	//     });
 	//   });
 	// }
-
+	}
+	
+	
+	
+	
+	module.exports = Map;
 
 /***/ },
 /* 3 */

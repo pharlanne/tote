@@ -1,10 +1,9 @@
-require("./landing.js")
-
+var Landing = require('./landing.js')
 
 window.onload = function(){
   console.log("tote app started")
-  landing();
-
+  var landing = new Landing();
+  landing.execute();
 
 }
 

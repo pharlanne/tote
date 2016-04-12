@@ -3,8 +3,8 @@ var infoWindow;
 var service;
 var marker;
 
-
-function initMap() {
+var Map = function(){
+  this.initMap = function() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 55.946969, lng: -3.202022},
     zoom: 10,
@@ -132,3 +132,9 @@ function initMap() {
 //     });
 //   });
 // }
+}
+
+
+
+
+module.exports = Map;
