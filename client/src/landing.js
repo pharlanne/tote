@@ -1,4 +1,4 @@
-var Map = require('./resultMap.js');
+var BasicResults = require('./views/placespractice.js');
 var Tote = require('./models/tote.js');
 var City = require('./models/city.js')
 
@@ -21,19 +21,19 @@ var Landing = function(){
      
 
      destination.id = 'destination'
-
+     createTrip.id = 'createTrip'
      createTrip.innerText= 'Create Trip'
      viewTrips.innerText= 'View Saved Trips'
 
     var autocomplete = new google.maps.places.Autocomplete(destination);
-
+   
     createTrip.addEventListener('click', function(){
-
-        var map = new Map;
-        map.initMap();
-        console.log("hello")
-        console.log(document.getElementById("title"))  
-    })
+      console.log("hello")
+      var basicResultsView = new BasicResults;
+        basicResultsView.initMap();
+        // console.log("hello")
+        // console.log(document.getElementById("title"))  
+      })
   }
 };
 
