@@ -15,6 +15,7 @@ function landing(){
    title.placeholder = 'Enter Trip Title';
    title.id = 'title';
 
+
    destination.id = 'destination'
 
    createTrip.innerText= 'Create Trip'
@@ -24,6 +25,7 @@ function landing(){
 
   createTrip.addEventListener('click', function(){
       initMap();
+     
   })
 
 };
