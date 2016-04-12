@@ -1,4 +1,6 @@
 var initMap = require('./resultMap.js');
+var Tote = require('./models/tote.js');
+var City = require('./models/city.js')
 
 function landing(){
   var box = document.getElementById('main');
@@ -15,6 +17,7 @@ function landing(){
    title.placeholder = 'Enter Trip Title';
    title.id = 'title';
 
+
    destination.id = 'destination'
 
    createTrip.innerText= 'Create Trip'
@@ -24,6 +27,9 @@ function landing(){
 
   createTrip.addEventListener('click', function(){
       initMap();
+      console.log("hello")
+      console.log(document.getElementById("title"))
+     
   })
 
 };
