@@ -1,4 +1,4 @@
-var express = require('server.js');
+var express = require('express');
 var app = express();
 var path = require('path');
 var MongoClient = require('mongodb').MongoClient;
@@ -8,7 +8,7 @@ var dataBaseURL = 'mongodb://localhost:27017/'
 app.use(bodyParser.json());
 
 app.get("/", function(req, res){
-  res.sendFile(path.join(__dirname + "client/build/index.html"));
+  res.sendFile(path.join(__dirname + "/client/build/index.html"));
 });
 
 
