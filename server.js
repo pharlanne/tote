@@ -20,11 +20,11 @@ app.get("/totes", function(req, res){
     // console.log(totes)
 
     totes.toArray(function(err, docs){
-      res.json(docs)
+      res.json(docs);
       db.close;
     })   
   })
-})
+});
 
 app.get("/totes/single", function(req, res){
 
@@ -41,7 +41,7 @@ app.get("/totes/single", function(req, res){
     })
     
   })
-})
+});
 
 
 app.post("/new", function(req, res){
@@ -56,7 +56,7 @@ app.post("/new", function(req, res){
     db.close();
   })
 
-})
+});
 
 app.post("/totes/single/update", function(req, res){
   
@@ -65,12 +65,19 @@ app.post("/totes/single/update", function(req, res){
     collection.update({name: "Paris"}, {$set:req.body});
     res.status(200).end();
     db.close;
-
   })
+});
 
+app.post("/totes/single/remove", function(req, res){
 
-})
-
+  MongoClient.connect(dataBaseURL, function(err, db){
+    var collection = db.collection("FriendsHoldiday");//so have to actually post something i.e. name of 
+    //colection we want to drop (in an object e.g. {name: <collectionName}  ) then do req.body.name
+    collection.drop();
+    res.status(200).end();
+    db.close;
+  })
+});
 
 app.use(express.static("client/build"));
 
