@@ -85,7 +85,8 @@ var params2 = {
   address: detailedPlaceResult.formatted_address,
   phoneNumber: detailedPlaceResult.formatted_phone_number,
   placeId: detailedPlaceResult.place_id,
-  rating: detailedPlaceResult2.rating
+  rating: detailedPlaceResult2.rating,
+  reviews: detailedPlaceResult2.reviews
 }
 
 var altDetailedTotie1 = new AltDetailedTotie(params)
@@ -130,7 +131,11 @@ describe("alternate detailed totie", function(){
     {
       rating: 3.5,
       text: "Decent"
-    }], altDetailedTotie1.reviews) })
+    }], altDetailedTotie1.reviews) });
+
+  it("should set reviews to undefined if they are not present in original model", function(){
+    assert.equal(undefined, altDetailedTotie2.reviews)
+  })
 
 
 });
