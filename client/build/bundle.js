@@ -62,8 +62,8 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var BasicResults = __webpack_require__(2);
-	var Tote = __webpack_require__(6);
-	var City = __webpack_require__(7)
+	var Tote = __webpack_require__(7);
+	var City = __webpack_require__(8)
 	
 	var Landing = function(){
 	  this.execute = function(){
@@ -116,10 +116,11 @@
 	
 	var BasicTotie = __webpack_require__(4);
 	var DetailedTotie = __webpack_require__(5)
-	var AltDetailedTotie = __webpack_require__(9)
-	var Tote = __webpack_require__(6)
-	var City = __webpack_require__(7)
-	var DetailedResultView = __webpack_require__(8)
+	var AltDetailedTotie = __webpack_require__(6)
+	var Tote = __webpack_require__(7)
+	var City = __webpack_require__(8)
+	var DetailedResultView = __webpack_require__(9)
+	var DetailedResultDisplay = __webpack_require__(10)
 	
 	
 	
@@ -304,8 +305,13 @@
 	      detailedResultView.initiateTotieConstruction(DetailedTotie, AltDetailedTotie, params, result)
 	      
 	      console.log(detailedResultView.detailedTotie)
-	          
-	
+	      
+	      var detailedResultDisplay = new DetailedResultDisplay(detailedResultView.detailedTotie);
+	      detailedResultDisplay.setAreaReferences();
+	      detailedResultDisplay.populateSelectionArea();
+	      detailedResultDisplay.setSelectionButtonDisplay();
+	      detailedResultDisplay.setHideSelectionButton();
+	      console.log(detailedResultDisplay)
 	
 	      var ul = document.createElement('ul'); 
 	      var li = document.createElement('li');
@@ -317,6 +323,7 @@
 	      displayMap.appendChild(ul);
 	      ul.appendChild(li);
 	      li.appendChild(image)
+	      li.appendChild(detailedResultDisplay.selectionArea)
 	
 	    })
 	    }
@@ -500,6 +507,80 @@
 	
 	
 	
+	var AltDetailedTotie = function(params){
+	  this.name = params["name"],
+	  this.location = {
+	    lat: params["lat"], 
+	    lng: params["lng"]
+	  },
+	  this.address = params["address"],
+	  this.phoneNumber = params["phoneNumber"],
+	  this.placeId = params["placeId"],
+	  this.rating = params["rating"],
+	  this.reviews = params["reviews"],
+	  this.types = params["types"],
+	  this.website = params["website"], 
+	  this.comments = []
+	
+	}
+	
+	AltDetailedTotie.prototype = {
+	  getAllReviewsText: function(){
+	    var results = [];
+	    this.reviews.forEach(function(review){
+	      results.push(review.text);
+	    });
+	    return results;
+	  },
+	  getAllReviewsRating: function(){
+	    var results = [];
+	    this.reviews.forEach(function(review){
+	      results.push(review.rating);
+	    })
+	    return results;
+	  },
+	  getComments: function(){
+	    var results = [];
+	    this.comments.forEach(function(comment){
+	      results.push(comment);
+	    });
+	    return results;
+	  },
+	  addComment: function(userInput){
+	    this.comments.push(userInput.toString());
+	  }, 
+	  getCommentIndex: function(commentText){
+	    var result = null;
+	    this.comments.forEach(function(comment){
+	      if(comment === commentText){
+	        var index = this.comments.indexOf(comment);
+	        result = index;
+	      }
+	    }.bind(this))
+	    return result;
+	  }, 
+	  removeComment: function(commentText){
+	    var index = this.getCommentIndex(commentText);
+	    this.comments.splice(index, 1);
+	  }
+	
+	 
+	}
+	
+	
+	
+	
+	
+	
+	module.exports = AltDetailedTotie;
+
+/***/ },
+/* 7 */
+/***/ function(module, exports) {
+
+	
+	
+	
 	var Tote = function(title){
 	  this.title = title;
 	  this.cities = [];
@@ -539,7 +620,7 @@
 	module.exports = Tote;
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports) {
 
 	
@@ -603,7 +684,7 @@
 	module.exports = City;
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports) {
 
 	
@@ -673,78 +754,101 @@
 	module.exports = DetailedResultView;
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports) {
 
 	
 	
 	
-	var AltDetailedTotie = function(params){
-	  this.name = params["name"],
-	  this.location = {
-	    lat: params["lat"], 
-	    lng: params["lng"]
-	  },
-	  this.address = params["address"],
-	  this.phoneNumber = params["phoneNumber"],
-	  this.placeId = params["placeId"],
-	  this.rating = params["rating"],
-	  this.reviews = params["reviews"],
-	  this.types = params["types"],
-	  this.website = params["website"], 
-	  this.comments = []
-	
+	var DetailedResultDisplay = function(detailedResult){
+	  this.detailedResult = detailedResult,
+	  this.displayArea = document.createElement("div"),
+	  this.header = document.createElement("div"),
+	  this.selectionArea = document.createElement("div"),
+	  this.contentArea = document.createElement("div"),
+	  this.footer = document.createElement("div"),
+	  this.selectionButton = null,
+	  this.hideSelectionButton = null
 	}
 	
-	AltDetailedTotie.prototype = {
-	  getAllReviewsText: function(){
-	    var results = [];
-	    this.reviews.forEach(function(review){
-	      results.push(review.text);
-	    });
-	    return results;
+	
+	DetailedResultDisplay.prototype = {
+	  
+	  setMainAreaId: function(){
+	    this.displayArea.id = this.detailedResult.name;
 	  },
-	  getAllReviewsRating: function(){
-	    var results = [];
-	    this.reviews.forEach(function(review){
-	      results.push(review.rating);
-	    })
-	    return results;
-	  },
-	  getComments: function(){
-	    var results = [];
-	    this.comments.forEach(function(comment){
-	      results.push(comment);
-	    });
-	    return results;
-	  },
-	  addComment: function(userInput){
-	    this.comments.push(userInput.toString());
+	  setMainAreaClass: function(element){
+	    this.displayArea.class = "display";
 	  }, 
-	  getCommentIndex: function(commentText){
-	    var result = null;
-	    this.comments.forEach(function(comment){
-	      if(comment === commentText){
-	        var index = this.comments.indexOf(comment);
-	        result = index;
-	      }
-	    }.bind(this))
-	    return result;
-	  }, 
-	  removeComment: function(commentText){
-	    var index = this.getCommentIndex(commentText);
-	    this.comments.splice(index, 1);
+	  setHeaderClass: function(){
+	    this.header.class = "display-header";
+	  },
+	  setHeaderContent: function(){
+	    this.header.innerHTML = this.detailedResult.name;
+	  },
+	  setSelectionAreaClass: function(){
+	    this.selectionArea.class = "display-content-options"
+	  },
+	  setSelectionButtonReferences: function(){
+	    this.selectionButton = document.createElement("input");
+	    this.selectionButton.type = "submit";
+	    this.selectionButton.id = this.detailedResult.name;
+	    this.selectionButton.value = "see details";
+	    this.selectionArea.appendChild(this.selectionButton);
+	  },
+	  setHideSelectionButtonReferences: function(){
+	    this.hideSelectionButton = document.createElement("input");
+	    this.hideSelectionButton.type = "submit";
+	    this.hideSelectionButton.id = "hide";
+	    this.hideSelectionButton.value = "hide details";
+	  },
+	  populateSelectionArea: function() {
+	    // console.log(this.selectionButton)
+	    this.selectionArea.appendChild(this.selectionButton);
+	    this.selectionArea.appendChild(this.hideSelectionButton);
+	  },
+	  setAreaReferences: function(){
+	    this.setMainAreaId();
+	    this.setMainAreaClass();
+	    this.setHeaderClass();
+	    this.setHeaderContent();
+	    this.setSelectionAreaClass();
+	    this.setSelectionButtonReferences();
+	    this.setHideSelectionButtonReferences();
+	  },
+	  setSelectionButtonDisplay: function(){
+	    this.selectionButton.onclick = function(){
+	      var div = document.createElement("div");
+	      var ul = document.createElement("ul");
+	      var li = document.createElement("li");
+	      li.innerText = this.detailedResult.address;
+	      ul.appendChild(li)
+	      
+	      var li = document.createElement("li");
+	      li.innerText = this.detailedResult.allOpeningHours;
+	      ul.appendChild(li)
+	
+	      var li = document.createElement("li");
+	      li.innerText = this.detailedResult.getAllReviewsText()
+	      ul.appendChild(li)
+	      div.appendChild(ul)
+	      this.selectionArea.appendChild(div);
+	    }.bind(this)
+	    
+	  },
+	  setHideSelectionButton: function(){
+	    this.hideSelectionButton.onclick = function(){
+	      var childNode = this.selectionArea.childNodes[2];
+	      this.selectionArea.removeChild(childNode);
+	    }.bind(this)
 	  }
-	
-	 
 	}
 	
 	
 	
+	module.exports = DetailedResultDisplay;
 	
-	
-	
-	module.exports = AltDetailedTotie;
+
 
 /***/ }
 /******/ ]);

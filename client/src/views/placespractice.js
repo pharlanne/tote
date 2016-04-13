@@ -11,7 +11,6 @@ var AltDetailedTotie = require('../models/alt_detailed_totie.js')
 var Tote = require('../models/tote.js')
 var City = require('../models/city.js')
 var DetailedResultView = require('./detailed_results_view.js')
-
 var DetailedResultDisplay = require('./detailed_results_display.js')
 
 
@@ -197,8 +196,13 @@ this.initMap = function() {
       detailedResultView.initiateTotieConstruction(DetailedTotie, AltDetailedTotie, params, result)
       
       console.log(detailedResultView.detailedTotie)
-          
-
+      
+      var detailedResultDisplay = new DetailedResultDisplay(detailedResultView.detailedTotie);
+      detailedResultDisplay.setAreaReferences();
+      detailedResultDisplay.populateSelectionArea();
+      detailedResultDisplay.setSelectionButtonDisplay();
+      detailedResultDisplay.setHideSelectionButton();
+      console.log(detailedResultDisplay)
 
       var ul = document.createElement('ul'); 
       var li = document.createElement('li');
@@ -210,6 +214,7 @@ this.initMap = function() {
       displayMap.appendChild(ul);
       ul.appendChild(li);
       li.appendChild(image)
+      li.appendChild(detailedResultDisplay.selectionArea)
 
     })
     }
