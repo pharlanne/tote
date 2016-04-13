@@ -10,10 +10,11 @@ var AltDetailedTotie = function(params){
   this.address = params["address"],
   this.phoneNumber = params["phoneNumber"],
   this.placeId = params["placeId"],
-  this.rating = params["rating"]
+  this.rating = params["rating"],
+  this.reviews = params["reviews"]
   // this.priceLevel = params["priceLevel"],
   
-  // this.reviews = params["reviews"],
+  
   // this.types = params["types"],
   // this.website = params["website"]
 

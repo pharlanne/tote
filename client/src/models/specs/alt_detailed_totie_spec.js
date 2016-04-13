@@ -74,7 +74,8 @@ var params = {
   address: detailedPlaceResult.formatted_address,
   phoneNumber: detailedPlaceResult.formatted_phone_number,
   placeId: detailedPlaceResult.place_id,
-  rating: detailedPlaceResult.rating
+  rating: detailedPlaceResult.rating,
+  reviews: detailedPlaceResult.reviews
 }
 
 var params2 = {
@@ -120,6 +121,16 @@ describe("alternate detailed totie", function(){
     assert.equal(undefined, altDetailedTotie2.rating);
   });
 
+  it("should have reviews", function(){
+    assert.deepEqual([
+    {
+      rating: 3, 
+      text: "Very good"
+    }, 
+    {
+      rating: 3.5,
+      text: "Decent"
+    }], altDetailedTotie1.reviews) })
 
 
-})
+});
