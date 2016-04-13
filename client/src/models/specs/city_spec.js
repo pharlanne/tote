@@ -13,7 +13,6 @@ var detailedPlaceResult = {
   }, 
   name: "Wetherspoons", 
   opening_hours: {
-    open_now: true,
     weekday_text: [
       "Monday: 11:00 AM - 1:00 AM", 
       "Tuesday: 11:00 AM - 1:00 AM", 
@@ -90,7 +89,6 @@ var detailedPlaceResultThree = {
   }, 
   name: "Marks and Spencers", 
   opening_hours: {
-    open_now: true,
     weekday_text: [
       "Monday: 11:00 AM - 11:00 AM", 
       "Tuesday: 11:00 AM - 11:00 AM", 
@@ -118,11 +116,11 @@ var detailedPlaceResultThree = {
   website: "www.mands.co.uk",
 }
 
-var detailedTotie1 = new DetailedTotie( detailedPlaceResult.name, detailedPlaceResult.geometry.location.lat, detailedPlaceResult.geometry.location.lng, detailedPlaceResult.formatted_address, detailedPlaceResult.formatted_phone_number, detailedPlaceResult.place_id, detailedPlaceResult.opening_hours.open_now, detailedPlaceResult.opening_hours.weekday_text, detailedPlaceResult.price_level, detailedPlaceResult.rating, detailedPlaceResult.reviews, detailedPlaceResult.types, detailedPlaceResult.website )
+var detailedTotie1 = new DetailedTotie( detailedPlaceResult.name, detailedPlaceResult.geometry.location.lat, detailedPlaceResult.geometry.location.lng, detailedPlaceResult.formatted_address, detailedPlaceResult.formatted_phone_number, detailedPlaceResult.place_id, detailedPlaceResult.opening_hours.weekday_text, detailedPlaceResult.price_level, detailedPlaceResult.rating, detailedPlaceResult.reviews, detailedPlaceResult.types, detailedPlaceResult.website )
 
-var detailedTotie2 = new DetailedTotie( detailedPlaceResultTwo.name, detailedPlaceResultTwo.geometry.location.lat, detailedPlaceResultTwo.geometry.location.lng, detailedPlaceResultTwo.formatted_address, detailedPlaceResultTwo.formatted_phone_number, detailedPlaceResultTwo.place_id, detailedPlaceResult.opening_hours.open_now, detailedPlaceResultTwo.opening_hours.weekday_text, detailedPlaceResultTwo.price_level, detailedPlaceResultTwo.rating, detailedPlaceResultTwo.reviews, detailedPlaceResultTwo.types, detailedPlaceResultTwo.website )
+var detailedTotie2 = new DetailedTotie( detailedPlaceResultTwo.name, detailedPlaceResultTwo.geometry.location.lat, detailedPlaceResultTwo.geometry.location.lng, detailedPlaceResultTwo.formatted_address, detailedPlaceResultTwo.formatted_phone_number, detailedPlaceResultTwo.place_id, detailedPlaceResultTwo.opening_hours.weekday_text, detailedPlaceResultTwo.price_level, detailedPlaceResultTwo.rating, detailedPlaceResultTwo.reviews, detailedPlaceResultTwo.types, detailedPlaceResultTwo.website )
 
-var detailedTotie3 = new DetailedTotie( detailedPlaceResultThree.name, detailedPlaceResultThree.geometry.location.lat, detailedPlaceResultThree.geometry.location.lng, detailedPlaceResultThree.formatted_address, detailedPlaceResultThree.formatted_phone_number, detailedPlaceResultThree.place_id, detailedPlaceResultThree.opening_hours.open_now, detailedPlaceResultThree.opening_hours.weekday_text, detailedPlaceResultThree.price_level, detailedPlaceResultThree.rating, detailedPlaceResultThree.reviews, detailedPlaceResultThree.types, detailedPlaceResultThree.website )
+var detailedTotie3 = new DetailedTotie( detailedPlaceResultThree.name, detailedPlaceResultThree.geometry.location.lat, detailedPlaceResultThree.geometry.location.lng, detailedPlaceResultThree.formatted_address, detailedPlaceResultThree.formatted_phone_number, detailedPlaceResultThree.place_id, detailedPlaceResultThree.opening_hours.weekday_text, detailedPlaceResultThree.price_level, detailedPlaceResultThree.rating, detailedPlaceResultThree.reviews, detailedPlaceResultThree.types, detailedPlaceResultThree.website )
 
 
 

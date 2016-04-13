@@ -113,10 +113,14 @@
 	var marker;
 	var mapList = document.getElementById('mapList');
 	var SearchView = __webpack_require__(3);
+	
 	var BasicTotie = __webpack_require__(4);
 	var DetailedTotie = __webpack_require__(5)
+	var AltDetailedTotie = __webpack_require__(8)
 	var Tote = __webpack_require__(6)
 	var City = __webpack_require__(7)
+	var DetailedResultView = __webpack_require__(9)
+	
 	
 	
 	
@@ -240,7 +244,8 @@
 	      location: map.getCenter(),
 	      // bounds: map.getBounds(),
 	      keyword: category,
-	      radius: 500
+	      radius: 1000,
+	      // type: [category]
 	    };
 	    
 	    service.nearbySearch(request, callback);
@@ -259,6 +264,13 @@
 	    for (var i = 0, result; result = results[i]; i++) {
 	      var basicTotie = new BasicTotie(result.name, result.geometry.location.lat(), result.geometry.location.lng(), result.place_id, result.price_level, result.rating, result.types)
 	      console.log(basicTotie)
+	
+	      // var detailedResultView = new DetailedResultView(basicTotie, map);
+	      // detailedResultView.getPlaceDetails();
+	      // console.log(detailedResultView.placeDetails)
+	      // detailedResultView.createDetailedTotie(DetailedTotie);
+	      // console.log(detailedResultView.detailedTotie)
+	
 	      listResult(result, displayMap);
 	      if(i===9) {break};
 	
@@ -272,6 +284,28 @@
 	        console.error(status);
 	        return;
 	      }
+	      
+	      var params = {
+	        name: result.name,
+	        lat: result.geometry.location.lat(),
+	        lng: result.geometry.location.lng(),
+	        address: result.formatted_address,
+	        phoneNumber: result.formatted_phone_number,
+	        placeId: result.place_id,
+	        rating: result.rating,
+	        reviews: result.reviews,
+	        types: result.types, 
+	        website: result.website
+	      }
+	
+	
+	      
+	      var detailedResultView = new DetailedResultView(map);
+	      detailedResultView.initiateTotieConstruction(DetailedTotie, AltDetailedTotie, params, result)
+	      
+	      console.log(detailedResultView.detailedTotie)
+	          
+	
 	
 	      var ul = document.createElement('ul'); 
 	      var li = document.createElement('li');
@@ -279,7 +313,7 @@
 	      var image = document.createElement('img')
 	      image.src = photoUrl
 	      li.innerText = result.name + " " + result.rating ;
-	      console.log(result)
+	      // console.log(result)
 	      displayMap.appendChild(ul);
 	      ul.appendChild(li);
 	      li.appendChild(image)
@@ -365,7 +399,7 @@
 	
 	
 	
-	var DetailedTotie = function(name, lat, lng, address, phoneNumber, placeId, openNow, openingHours, priceLevel, rating, reviews, types, website){
+	var DetailedTotie = function(name, lat, lng, address, phoneNumber, placeId, openingHours, priceLevel, rating, reviews, types, website){
 	  this.name = name, 
 	  this.location = {
 	    lat: lat, 
@@ -374,7 +408,6 @@
 	  this.address = address, 
 	  this.phoneNumber = phoneNumber,
 	  this.placeId = placeId, 
-	  this.openNow = openNow, 
 	  this.allOpeningHours = openingHours,
 	  this.priceLevel = priceLevel,
 	  this.rating = rating,
@@ -400,6 +433,13 @@
 	    for (review of this.reviews){
 	      result.push(review.text);
 	    }
+	    return result;
+	  },
+	  getAllReviewsRating: function(){
+	    var result = [];
+	    for (var i = 0; i < this.reviews.length; i++){
+	      result.push(this.reviews[i].rating)
+	    };
 	    return result;
 	  },
 	  addComment: function(input){
@@ -561,6 +601,150 @@
 	
 	
 	module.exports = City;
+
+/***/ },
+/* 8 */
+/***/ function(module, exports) {
+
+	
+	
+	
+	var AltDetailedTotie = function(params){
+	  this.name = params["name"],
+	  this.location = {
+	    lat: params["lat"], 
+	    lng: params["lng"]
+	  },
+	  this.address = params["address"],
+	  this.phoneNumber = params["phoneNumber"],
+	  this.placeId = params["placeId"],
+	  this.rating = params["rating"],
+	  this.reviews = params["reviews"],
+	  this.types = params["types"],
+	  this.website = params["website"], 
+	  this.comments = []
+	
+	}
+	
+	AltDetailedTotie.prototype = {
+	  getAllReviewsText: function(){
+	    var results = [];
+	    this.reviews.forEach(function(review){
+	      results.push(review.text);
+	    });
+	    return results;
+	  },
+	  getAllReviewsRating: function(){
+	    var results = [];
+	    this.reviews.forEach(function(review){
+	      results.push(review.rating);
+	    })
+	    return results;
+	  },
+	  getComments: function(){
+	    var results = [];
+	    this.comments.forEach(function(comment){
+	      results.push(comment);
+	    });
+	    return results;
+	  },
+	  addComment: function(userInput){
+	    this.comments.push(userInput.toString());
+	  }, 
+	  getCommentIndex: function(commentText){
+	    var result = null;
+	    this.comments.forEach(function(comment){
+	      if(comment === commentText){
+	        var index = this.comments.indexOf(comment);
+	        result = index;
+	      }
+	    }.bind(this))
+	    return result;
+	  }, 
+	  removeComment: function(commentText){
+	    var index = this.getCommentIndex(commentText);
+	    this.comments.splice(index, 1);
+	  }
+	
+	 
+	}
+	
+	
+	
+	
+	
+	
+	module.exports = AltDetailedTotie;
+
+/***/ },
+/* 9 */
+/***/ function(module, exports) {
+
+	
+	
+	
+	var DetailedResultView = function(map){
+	  this.element = document.createElement("div")
+	  // this.basicTotie = basicTotie;
+	  this.map = map;
+	  this.placeDetails = null;
+	  this.detailedTotie = null;
+	  // this.altDetailedTotie = null;
+	  this.service = new google.maps.places.PlacesService(document.createElement("div"))
+	}
+	
+	DetailedResultView.prototype = {
+	  createPlaceRequest: function(){
+	    var request = {
+	      placeId: this.basicTotie.placeId
+	    }
+	    return request;
+	  }, 
+	  getPlaceDetails: function(){
+	    // console.log()
+	    var placeResult;
+	    this.service.getDetails(this.createPlaceRequest(), function(status, result){
+	      if (status !== google.maps.places.PlacesServiceStatus.OK) {
+	        console.error(status);
+	        return;
+	      }
+	      this.placeResult = result;
+	    })
+	    
+	  },
+	  createDetailedTotie: function(googleObject, detailedTotieConstrFunc){
+	    // var result = this.getPlaceDetails();
+	    // console.log(result)
+	    var detailedTotie = new detailedTotieConstrFunc(googleObject.name, googleObject.geometry.location.lat(), googleObject.geometry.location.lng(), googleObject.formatted_address, googleObject.formatted_phone_number, googleObject.place_id, googleObject.opening_hours.weekday_text, googleObject.price_level, googleObject.rating, googleObject.reviews, googleObject.types, googleObject.website);
+	    this.detailedTotie = detailedTotie;
+	  }, 
+	  createAltDetailedTotie: function(params, altDetailedTotieConstrFunc){
+	    var altDetailedTotie = new altDetailedTotieConstrFunc(params);
+	    this.detailedTotie = altDetailedTotie;
+	  }, 
+	  filterGoogleResult: function(object){
+	    var result;
+	    if(object.opening_hours === undefined){
+	      result = false;
+	    } else {
+	      result = true;
+	    }
+	   return result;
+	  }, 
+	  initiateTotieConstruction: function(detailedTotieConstrFunc, altDetailedTotieConstrFunc, params, object){
+	    if(this.filterGoogleResult(object) === true){
+	      this.createDetailedTotie(object, detailedTotieConstrFunc);
+	    } else if (this.filterGoogleResult(object) === false){
+	      this.createAltDetailedTotie(params, altDetailedTotieConstrFunc);
+	    }
+	  }
+	}
+	
+	
+	
+	
+	
+	module.exports = DetailedResultView;
 
 /***/ }
 /******/ ]);
