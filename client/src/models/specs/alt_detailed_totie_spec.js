@@ -195,14 +195,21 @@ describe("alternate detailed totie", function(){
   });
 
   it("should be able to return the index of a comment", function(){
-
     assert.equal(0, altDetailedTotie1.getCommentIndex("This looks cool, need to ask Fran if she'd like it"));
   });
 
   it("should return null if comment cannot be found", function(){
-
     assert.equal(null, altDetailedTotie1.getCommentIndex("Awesome! Cannot wait for this! BOOK SOON!"));
   });
+
+  it("should be able to remove a comment", function(){
+    altDetailedTotie1.addComment("This looks epic! Need to book before 13th May.");
+    altDetailedTotie1.removeComment("This looks epic! Need to book before 13th May.");
+
+    assert.deepEqual(["This looks cool, need to ask Fran if she'd like it"], altDetailedTotie1.getComments());
+  });
+
+
 
 
 });

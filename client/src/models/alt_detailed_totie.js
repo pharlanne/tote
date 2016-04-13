@@ -52,6 +52,10 @@ AltDetailedTotie.prototype = {
       }
     }.bind(this))
     return result;
+  }, 
+  removeComment: function(commentText){
+    var index = this.getCommentIndex(commentText);
+    this.comments.splice(index, 1);
   }
 
  
