@@ -183,7 +183,16 @@
 	
 	            
 	          });
-	            console.log(results);
+	            console.log(results[0].address_components[0].long_name, results[0].address_components.slice(-1)[0].long_name, results[0].geometry.location);
+	
+	            var name = results[0].address_components[0].long_name;
+	            var country =  results[0].address_components.slice(-1)[0].long_name;
+	            var lat =  results[0].geometry.location.lat;
+	            var lng = results[0].geometry.location.lng;
+	            var params = {name, country, lat, lng};
+	            var city = new City(params);
+	
+	                       
 	        } 
 	      }else {
 	          alert('Geocode was not successful for the following reason: ' + status);
