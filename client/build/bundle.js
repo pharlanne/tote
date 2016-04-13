@@ -62,8 +62,8 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var BasicResults = __webpack_require__(2);
-	var Tote = __webpack_require__(6);
-	var City = __webpack_require__(7)
+	var Tote = __webpack_require__(3);
+	var City = __webpack_require__(4)
 	
 	var Landing = function(){
 	  this.execute = function(){
@@ -112,14 +112,15 @@
 	var service;
 	var marker;
 	var mapList = document.getElementById('mapList');
-	var SearchView = __webpack_require__(3);
+	var SearchView = __webpack_require__(5);
 	
-	var BasicTotie = __webpack_require__(4);
-	var DetailedTotie = __webpack_require__(5)
+	var BasicTotie = __webpack_require__(6);
+	var DetailedTotie = __webpack_require__(7)
 	var AltDetailedTotie = __webpack_require__(8)
-	var Tote = __webpack_require__(6)
-	var City = __webpack_require__(7)
+	var Tote = __webpack_require__(3)
+	var City = __webpack_require__(4)
 	var DetailedResultView = __webpack_require__(9)
+	var DetailedResultDisplay = __webpack_require__(10)
 	
 	
 	
@@ -313,8 +314,13 @@
 	      detailedResultView.initiateTotieConstruction(DetailedTotie, AltDetailedTotie, params, result)
 	      
 	      console.log(detailedResultView.detailedTotie)
-	          
-	
+	      
+	      var detailedResultDisplay = new DetailedResultDisplay(detailedResultView.detailedTotie);
+	      detailedResultDisplay.setAreaReferences();
+	      detailedResultDisplay.populateSelectionArea();
+	      detailedResultDisplay.setSelectionButtonDisplay();
+	      detailedResultDisplay.setHideSelectionButton();
+	      console.log(detailedResultDisplay)
 	
 	      var ul = document.createElement('ul'); 
 	      var li = document.createElement('li');
@@ -329,10 +335,15 @@
 	      displayMap.appendChild(ul);
 	      ul.appendChild(li);
 	      li.appendChild(image)
+	      li.appendChild(detailedResultDisplay.selectionArea)
 	      li.addEventListener('click', function(){
 	        addMarker(result);
 	    
 	      })
+	
+	      
+	
+	
 	    })
 	    }
 	   
@@ -375,6 +386,115 @@
 /* 3 */
 /***/ function(module, exports) {
 
+	
+	
+	
+	var Tote = function(title){
+	  this.title = title;
+	  this.cities = [];
+	}
+	
+	Tote.prototype = {
+	  addCity: function(city){
+	    this.cities.push(city);
+	  },
+	  getCity: function(cityName){
+	    var results;
+	    this.cities.forEach(function(city){
+	      if(city.name === cityName){
+	        results = city
+	      }
+	    })
+	    return results;
+	  },
+	  getCityIndex: function(cityName){
+	    var city = this.getCity(cityName);
+	    return this.cities.indexOf(city);
+	  },
+	  removeCity: function(cityName){
+	    var index = this.getCityIndex(cityName);
+	    this.cities.splice(index, 1);
+	  }
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	module.exports = Tote;
+
+/***/ },
+/* 4 */
+/***/ function(module, exports) {
+
+	
+	
+	
+	var City = function(params){
+	  this.name = params["name"],
+	  this.country = params["country"], 
+	  this.location = {
+	    lat: params["lat"],
+	    lng: params["lng"]
+	  }, 
+	  this.toties = []
+	}
+	
+	City.prototype = {
+	  addTotie: function(totie){
+	    this.toties.push(totie);
+	  }, 
+	  getTotie: function(searchQuery){
+	    var result;
+	    this.toties.forEach(function(totie){
+	      if(totie.name.includes(searchQuery)){
+	        result = totie;
+	      }
+	    })
+	    return result;
+	  }, 
+	
+	  getTotiesType: function(searchQuery){
+	    var results = [];
+	    this.toties.forEach(function(totie){
+	      totie.types.forEach(function(type){
+	        if(type === searchQuery){
+	          results.push(totie);
+	        } 
+	      }.bind(this))
+	    }.bind(this))
+	
+	    if(results.length > 0 ){
+	      return results;
+	    } else {
+	      return null
+	    }
+	  },
+	  getTotieIndex: function(searchQuery){
+	    var totie = this.getTotie(searchQuery)
+	    return this.toties.indexOf(totie)
+	  },
+	  removeTotie: function(searchQuery){
+	    var index = this.getTotieIndex(searchQuery);
+	    this.toties.splice(index,1)
+	  }
+	
+	
+	
+	
+	}
+	
+	
+	module.exports = City;
+
+/***/ },
+/* 5 */
+/***/ function(module, exports) {
+
 	var SearchViews = function(map){
 	this.map = map
 	this.execute = function(){
@@ -388,7 +508,7 @@
 	module.exports = SearchViews;
 
 /***/ },
-/* 4 */
+/* 6 */
 /***/ function(module, exports) {
 
 	
@@ -409,7 +529,7 @@
 	module.exports = BasicTotie;
 
 /***/ },
-/* 5 */
+/* 7 */
 /***/ function(module, exports) {
 
 	
@@ -508,115 +628,6 @@
 	
 	
 	module.exports = DetailedTotie;
-
-/***/ },
-/* 6 */
-/***/ function(module, exports) {
-
-	
-	
-	
-	var Tote = function(title){
-	  this.title = title;
-	  this.cities = [];
-	}
-	
-	Tote.prototype = {
-	  addCity: function(city){
-	    this.cities.push(city);
-	  },
-	  getCity: function(cityName){
-	    var results;
-	    this.cities.forEach(function(city){
-	      if(city.name === cityName){
-	        results = city
-	      }
-	    })
-	    return results;
-	  },
-	  getCityIndex: function(cityName){
-	    var city = this.getCity(cityName);
-	    return this.cities.indexOf(city);
-	  },
-	  removeCity: function(cityName){
-	    var index = this.getCityIndex(cityName);
-	    this.cities.splice(index, 1);
-	  }
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	module.exports = Tote;
-
-/***/ },
-/* 7 */
-/***/ function(module, exports) {
-
-	
-	
-	
-	var City = function(params){
-	  this.name = params["name"],
-	  this.country = params["country"], 
-	  this.location = {
-	    lat: params["lat"],
-	    lng: params["lng"]
-	  }, 
-	  this.toties = []
-	}
-	
-	City.prototype = {
-	  addTotie: function(totie){
-	    this.toties.push(totie);
-	  }, 
-	  getTotie: function(searchQuery){
-	    var result;
-	    this.toties.forEach(function(totie){
-	      if(totie.name.includes(searchQuery)){
-	        result = totie;
-	      }
-	    })
-	    return result;
-	  }, 
-	
-	  getTotiesType: function(searchQuery){
-	    var results = [];
-	    this.toties.forEach(function(totie){
-	      totie.types.forEach(function(type){
-	        if(type === searchQuery){
-	          results.push(totie);
-	        } 
-	      }.bind(this))
-	    }.bind(this))
-	
-	    if(results.length > 0 ){
-	      return results;
-	    } else {
-	      return null
-	    }
-	  },
-	  getTotieIndex: function(searchQuery){
-	    var totie = this.getTotie(searchQuery)
-	    return this.toties.indexOf(totie)
-	  },
-	  removeTotie: function(searchQuery){
-	    var index = this.getTotieIndex(searchQuery);
-	    this.toties.splice(index,1)
-	  }
-	
-	
-	
-	
-	}
-	
-	
-	module.exports = City;
 
 /***/ },
 /* 8 */
@@ -761,6 +772,103 @@
 	
 	
 	module.exports = DetailedResultView;
+
+/***/ },
+/* 10 */
+/***/ function(module, exports) {
+
+	
+	
+	
+	var DetailedResultDisplay = function(detailedResult){
+	  this.detailedResult = detailedResult,
+	  this.displayArea = document.createElement("div"),
+	  this.header = document.createElement("div"),
+	  this.selectionArea = document.createElement("div"),
+	  this.contentArea = document.createElement("div"),
+	  this.footer = document.createElement("div"),
+	  this.selectionButton = null,
+	  this.hideSelectionButton = null
+	}
+	
+	
+	DetailedResultDisplay.prototype = {
+	  
+	  setMainAreaId: function(){
+	    this.displayArea.id = this.detailedResult.name;
+	  },
+	  setMainAreaClass: function(element){
+	    this.displayArea.class = "display";
+	  }, 
+	  setHeaderClass: function(){
+	    this.header.class = "display-header";
+	  },
+	  setHeaderContent: function(){
+	    this.header.innerHTML = this.detailedResult.name;
+	  },
+	  setSelectionAreaClass: function(){
+	    this.selectionArea.class = "display-content-options"
+	  },
+	  setSelectionButtonReferences: function(){
+	    this.selectionButton = document.createElement("input");
+	    this.selectionButton.type = "submit";
+	    this.selectionButton.id = this.detailedResult.name;
+	    this.selectionButton.value = "see details";
+	    this.selectionArea.appendChild(this.selectionButton);
+	  },
+	  setHideSelectionButtonReferences: function(){
+	    this.hideSelectionButton = document.createElement("input");
+	    this.hideSelectionButton.type = "submit";
+	    this.hideSelectionButton.id = "hide";
+	    this.hideSelectionButton.value = "hide details";
+	  },
+	  populateSelectionArea: function() {
+	    // console.log(this.selectionButton)
+	    this.selectionArea.appendChild(this.selectionButton);
+	    this.selectionArea.appendChild(this.hideSelectionButton);
+	  },
+	  setAreaReferences: function(){
+	    this.setMainAreaId();
+	    this.setMainAreaClass();
+	    this.setHeaderClass();
+	    this.setHeaderContent();
+	    this.setSelectionAreaClass();
+	    this.setSelectionButtonReferences();
+	    this.setHideSelectionButtonReferences();
+	  },
+	  setSelectionButtonDisplay: function(){
+	    this.selectionButton.onclick = function(){
+	      var div = document.createElement("div");
+	      var ul = document.createElement("ul");
+	      var li = document.createElement("li");
+	      li.innerText = this.detailedResult.address;
+	      ul.appendChild(li)
+	      
+	      var li = document.createElement("li");
+	      li.innerText = this.detailedResult.allOpeningHours;
+	      ul.appendChild(li)
+	
+	      var li = document.createElement("li");
+	      li.innerText = this.detailedResult.getAllReviewsText()
+	      ul.appendChild(li)
+	      div.appendChild(ul)
+	      this.selectionArea.appendChild(div);
+	    }.bind(this)
+	    
+	  },
+	  setHideSelectionButton: function(){
+	    this.hideSelectionButton.onclick = function(){
+	      var childNode = this.selectionArea.childNodes[2];
+	      this.selectionArea.removeChild(childNode);
+	    }.bind(this)
+	  }
+	}
+	
+	
+	
+	module.exports = DetailedResultDisplay;
+	
+
 
 /***/ }
 /******/ ]);
