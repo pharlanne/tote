@@ -1,7 +1,7 @@
 
 
 
-var DetailedTotie = function(name, lat, lng, address, phoneNumber, placeId, openNow, openingHours, priceLevel, rating, reviews, types, website){
+var DetailedTotie = function(name, lat, lng, address, phoneNumber, placeId, openingHours, priceLevel, rating, reviews, types, website){
   this.name = name, 
   this.location = {
     lat: lat, 
@@ -10,7 +10,6 @@ var DetailedTotie = function(name, lat, lng, address, phoneNumber, placeId, open
   this.address = address, 
   this.phoneNumber = phoneNumber,
   this.placeId = placeId, 
-  this.openNow = openNow, 
   this.allOpeningHours = openingHours,
   this.priceLevel = priceLevel,
   this.rating = rating,
@@ -36,6 +35,13 @@ DetailedTotie.prototype = {
     for (review of this.reviews){
       result.push(review.text);
     }
+    return result;
+  },
+  getAllReviewsRating: function(){
+    var result = [];
+    for (var i = 0; i < this.reviews.length; i++){
+      result.push(this.reviews[i].rating)
+    };
     return result;
   },
   addComment: function(input){
