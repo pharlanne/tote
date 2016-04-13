@@ -2,11 +2,11 @@
 
 
 var AltDetailedTotie = function(params){
-  this.name = params["name"]
-  // this.location = {
-  //   lat: params["lat"], 
-  //   lng: params["lng"]
-  // }, 
+  this.name = params["name"],
+  this.location = {
+    lat: params["lat"], 
+    lng: params["lng"]
+  }
   // this.address = params["address"],
   // this.phoneNumber = params["phoneNumber"],
   // this.placeId = params["placeId"],
