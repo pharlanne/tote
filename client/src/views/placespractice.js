@@ -12,6 +12,8 @@ var Tote = require('../models/tote.js')
 var City = require('../models/city.js')
 var DetailedResultView = require('./detailed_results_view.js')
 
+var DetailedResultDisplay = require('./detailed_results_display.js')
+
 
 
 
