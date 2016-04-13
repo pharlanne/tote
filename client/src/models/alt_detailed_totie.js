@@ -32,6 +32,13 @@ AltDetailedTotie.prototype = {
       results.push(review.rating);
     })
     return results;
+  },
+  getComments: function(){
+    var results = [];
+    this.comments.forEach(function(comment){
+      results.push(comment);
+    });
+    return results;
   }
  
 }

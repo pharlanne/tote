@@ -181,7 +181,11 @@ describe("alternate detailed totie", function(){
   });
 
   it("should have a an empty comments holder", function(){
-    assert.deepEqual([], altDetailedTotie1.comments)
+    assert.deepEqual([], altDetailedTotie1.comments);
+  });
+
+  it("should be able to return comments", function(){
+    assert.deepEqual([], altDetailedTotie1.getComments())
   })
 
 });
