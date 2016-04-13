@@ -169,7 +169,11 @@ describe("alternate detailed totie", function(){
   });
 
   it("should have a website", function(){
-    assert.equal("https://www.jdwetherspoon.com/pubs/all-pubs/scotland/edinburgh/the-standing-order-edinburgh", altDetailedTotie1.website)
+    assert.equal("https://www.jdwetherspoon.com/pubs/all-pubs/scotland/edinburgh/the-standing-order-edinburgh", altDetailedTotie1.website);
+  });
+
+  it("should be able to return all reviews as text", function(){
+    assert.deepEqual(["Very good", "Awful"], altDetailedTotie1.getAllReviewsText())
   })
 
 });

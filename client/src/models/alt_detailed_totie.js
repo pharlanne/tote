@@ -17,6 +17,17 @@ var AltDetailedTotie = function(params){
 
 }
 
+AltDetailedTotie.prototype = {
+  getAllReviewsText: function(){
+    var results = [];
+    this.reviews.forEach(function(review){
+      results.push(review.text);
+    });
+    return results;
+  }
+
+}
+
 
 
 
