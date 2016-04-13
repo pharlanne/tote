@@ -22,7 +22,7 @@ this.initMap = function() {
     center: {lat: 55.946969, lng: -3.202022},
     zoom: 10,
   });
-
+mapList.innerHTML = '';
 
 
   // var tote = new Tote(title.value);
@@ -83,7 +83,7 @@ this.initMap = function() {
             var params = {name, country, lat, lng};
             var city = new City(params);
 
-                       
+
         } 
       }else {
           alert('Geocode was not successful for the following reason: ' + status);
@@ -209,21 +209,29 @@ this.initMap = function() {
 
       var ul = document.createElement('ul'); 
       var li = document.createElement('li');
+
+
       var photoUrl = result.photos[0].getUrl({'maxWidth': 35, 'maxHeight' : 35});
       var image = document.createElement('img')
       image.src = photoUrl
-      li.innerText = result.name + " " + result.rating ;
+      li.innerHTML =  result.name + " " + result.rating ;
+
       // console.log(result)
       displayMap.appendChild(ul);
       ul.appendChild(li);
       li.appendChild(image)
-
+      li.addEventListener('click', function(){
+        addMarker(result);
+    
+      })
     })
     }
+   
 
   function addMarker(place) {
     var marker = new google.maps.Marker({
       map: map,
+      animation: google.maps.Animation.DROP,
       position: place.geometry.location,
       icon: {
         url: 'http://maps.gstatic.com/mapfiles/circle.png',
@@ -239,8 +247,7 @@ this.initMap = function() {
           return;
         }
 
-
-        infoWindow.setContent(result.name + result.formatted_address + ", " + 'rating: ' + result.rating);
+        infoWindow.setContent(result.name + ",  "  + '<br>'+ result.formatted_address + ",  " + "<br>" +'Rating: ' + result.rating);
 
         infoWindow.open(map, marker);
       });
