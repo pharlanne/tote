@@ -47,7 +47,8 @@ var params = {
   lng: detailedPlaceResult.geometry.location.lng,
   address: detailedPlaceResult.formatted_address,
   phoneNumber: detailedPlaceResult.formatted_phone_number,
-  placeId: detailedPlaceResult.place_id
+  placeId: detailedPlaceResult.place_id,
+  rating: detailedPlaceResult.rating
 }
 
 var altDetailedTotie1 = new AltDetailedTotie(params)
@@ -73,6 +74,10 @@ describe("alternate detailed totie", function(){
 
   it("should have a place Id", function(){
     assert.equal("1234", altDetailedTotie1.placeId);
+  });
+
+  it("should have a rating", function(){
+    assert.equal(3.5, altDetailedTotie1.rating);
   });
 
 
