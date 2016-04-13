@@ -46,7 +46,8 @@ var params = {
   lat: detailedPlaceResult.geometry.location.lat,
   lng: detailedPlaceResult.geometry.location.lng,
   address: detailedPlaceResult.formatted_address,
-  phoneNumber: detailedPlaceResult.formatted_phone_number
+  phoneNumber: detailedPlaceResult.formatted_phone_number,
+  placeId: detailedPlaceResult.place_id
 }
 
 var altDetailedTotie1 = new AltDetailedTotie(params)
@@ -67,8 +68,12 @@ describe("alternate detailed totie", function(){
   });
 
   it("should have a phone number property", function(){
-    assert.equal("0131 4431212", altDetailedTotie1.phoneNumber)
-  })
+    assert.equal("0131 4431212", altDetailedTotie1.phoneNumber);
+  });
+
+  it("should have a place Id", function(){
+    assert.equal("1234", altDetailedTotie1.placeId);
+  });
 
 
 
