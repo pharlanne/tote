@@ -28,13 +28,25 @@ var detailedPlaceResult = {
   rating: 3.5, 
   reviews: [
     {
-      rating: 3, 
-      text: "Very good"
+      aspects: [{rating: 5, type: "overall"}] , 
+      author_name: "John", 
+      author_url: "www.mywebsite.com", 
+      language: "en", 
+      profile_photo: "www.photo.com", 
+      rating: 5, 
+      text: "Very good", 
+      time: 1234
     }, 
     {
-      rating: 3.5,
-      text: "Decent"
-    }
+      aspects: [{rating: 3, type: "overall"}] , 
+      author_name: "Jane", 
+      author_url: "www.mywebsite.com", 
+      language: "en", 
+      profile_photo: "www.photo.com", 
+      rating: 3, 
+      text: "Awful", 
+      time: 5678
+    }    
   ],
   types: ["restaurant", "bar", "food"],
   website: "https://www.jdwetherspoon.com/pubs/all-pubs/scotland/edinburgh/the-standing-order-edinburgh",
@@ -127,13 +139,26 @@ describe("alternate detailed totie", function(){
   it("should have reviews", function(){
     assert.deepEqual([
     {
-      rating: 3, 
-      text: "Very good"
+      aspects: [{rating: 5, type: "overall"}] , 
+      author_name: "John", 
+      author_url: "www.mywebsite.com", 
+      language: "en", 
+      profile_photo: "www.photo.com", 
+      rating: 5, 
+      text: "Very good", 
+      time: 1234
     }, 
     {
-      rating: 3.5,
-      text: "Decent"
-    }], altDetailedTotie1.reviews) });
+      aspects: [{rating: 3, type: "overall"}] , 
+      author_name: "Jane", 
+      author_url: "www.mywebsite.com", 
+      language: "en", 
+      profile_photo: "www.photo.com", 
+      rating: 3, 
+      text: "Awful", 
+      time: 5678
+    }    
+  ], altDetailedTotie1.reviews) });
 
   it("should set reviews to undefined if they are not present in original model", function(){
     assert.equal(undefined, altDetailedTotie2.reviews);
