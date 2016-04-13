@@ -188,4 +188,10 @@ describe("alternate detailed totie", function(){
     assert.deepEqual([], altDetailedTotie1.getComments())
   })
 
+  it("should be able to add comments", function(){
+    altDetailedTotie1.addComment("This looks cool, need to ask Fran if she'd like it")
+
+    assert.deepEqual(["This looks cool, need to ask Fran if she'd like it"], altDetailedTotie1.getComments());
+  });
+
 });

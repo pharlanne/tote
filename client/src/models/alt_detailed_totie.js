@@ -39,7 +39,11 @@ AltDetailedTotie.prototype = {
       results.push(comment);
     });
     return results;
+  },
+  addComment: function(userInput){
+    this.comments.push(userInput.toString());
   }
+  
  
 }
 
