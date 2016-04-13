@@ -42,8 +42,18 @@ AltDetailedTotie.prototype = {
   },
   addComment: function(userInput){
     this.comments.push(userInput.toString());
+  }, 
+  getCommentIndex: function(commentText){
+    var result;
+    this.comments.forEach(function(comment){
+      if(comment === commentText){
+        var index = this.comments.indexOf(comment);
+        result = index;
+      }
+    }.bind(this))
+    return result;
   }
-  
+
  
 }
 

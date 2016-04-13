@@ -194,4 +194,9 @@ describe("alternate detailed totie", function(){
     assert.deepEqual(["This looks cool, need to ask Fran if she'd like it"], altDetailedTotie1.getComments());
   });
 
+  it("should be able to return the index of a comment", function(){
+
+    assert.equal(0, altDetailedTotie1.getCommentIndex("This looks cool, need to ask Fran if she'd like it"))
+  })
+
 });
