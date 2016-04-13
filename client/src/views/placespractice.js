@@ -2,29 +2,36 @@ var map;
 var infoWindow;
 var service;
 var marker;
-var mapList = document.getElementById('mapList')
+var mapList = document.getElementById('mapList');
 var SearchView = require('./search_views.js');
-var BasicTotie = require('../models/basic_totie.js')
+var BasicTotie = require('../models/basic_totie.js');
 var DetailedTotie = require('../models/detailed_totie.js')
+var Tote = require('../models/tote.js')
+var City = require('../models/city.js')
 
 
 
 var BasicResults = function(){
 this.initMap = function() {
-  console.log("reached here")
+
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 55.946969, lng: -3.202022},
     zoom: 10,
-
   });
-  console.log(map)
-  
+
+
+
+  // var tote = new Tote(title.value);
+  // var params = 
+  // var city = new City(params)
+
+ 
+
 
 
   infoWindow = new google.maps.InfoWindow();
   service = new google.maps.places
-           .PlacesService(document.getElementById('mapList')
-                          .appendChild(document.createElement('div')));
+           .PlacesService(map);
 
   ////////// adding the autocomplete functionality
   var input = (document.getElementById('destination')); //gets the element that contains the value we want to auto complete
@@ -35,6 +42,19 @@ this.initMap = function() {
 
   var geocoder = new google.maps.Geocoder();
 
+  document.getElementById('destination').addEventListener('keypress', function(event){
+    if(event.keycode==13){
+    event.preventDefault();
+    geocodeAddress(geocoder, map);
+  }
+  });
+  
+    document.getElementById('createTrip').addEventListener('click', function(event){
+      event.preventDefault();
+      geocodeAddress(geocoder, map);
+    });
+  
+
     function geocodeAddress(geocoder, resultsMap) {
       var address = document.getElementById('destination').value;
       geocoder.geocode({'address': address}, function(results, status) {
@@ -43,12 +63,14 @@ this.initMap = function() {
             if (marker) { // this is waht moves the marker each time marker var set in global
                 marker.setPosition(results[0].geometry.location); //if exists take the position and move it else
             }else{
-
+      
             marker = new google.maps.Marker({ //create a new marker which is what happens in the first instance.
             map: resultsMap,
             position: results[0].geometry.location,
+
             
           });
+            console.log(results);
         } 
       }else {
           alert('Geocode was not successful for the following reason: ' + status);
@@ -57,28 +79,12 @@ this.initMap = function() {
       });
     }
 
-//the below code adds an event listener to the 'Enter' key. It grabs the input 'autoCity' and attaches an event listener to it; the listener is a 'key press', when the keypress happens on the 'enter key' which has a default number of 13 this fires off a function - which geociode address function above and placesa a marker on the map. 
-    document.getElementById('destination').addEventListener('keypress', function(e) {
-      if(e.keyCode == 13){
-      geocodeAddress(geocoder, map)};
-    });
-    console.log(document.getElementById('createTrip'))
-    document.getElementById('createTrip').addEventListener('click', function(){
-      geocodeAddress(geocoder, map)
-    });
- 
-  // var searchView = new SearchView(map);
-  // searchView.execute();
       var hotels = document.createElement('img');
-
       var bars = document.createElement('img');
-
       var restaurants = document.createElement('img');
-
       var landmarks = document.createElement('img');
       var events = document.createElement('img');
       var shopping = document.createElement('img')
-
       var paste = document.getElementById('icons')
       paste.innerHTML = "";
 
@@ -92,7 +98,6 @@ this.initMap = function() {
       paste.appendChild(shopping)
 
       hotels.src ='./png/hotel.png';
-
       bars.src = './png/bar.png';
       restaurants.src ='./png/restaurant.png';
       landmarks.src = './png/see.png';
@@ -122,7 +127,6 @@ this.initMap = function() {
 
 
   function performSearch(category) {
-    
     var request = {
       location: map.getCenter(),
       // bounds: map.getBounds(),
@@ -159,7 +163,6 @@ this.initMap = function() {
         console.error(status);
         return;
       }
-
 
       var ul = document.createElement('ul'); 
       var li = document.createElement('li');
@@ -200,7 +203,6 @@ this.initMap = function() {
       });
     });
   }
-
 }
 }
 //news up the elements for the icon menus
