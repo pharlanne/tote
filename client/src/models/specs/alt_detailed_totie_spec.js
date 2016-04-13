@@ -44,7 +44,8 @@ var detailedPlaceResult = {
 var params = {
   name: detailedPlaceResult.name,
   lat: detailedPlaceResult.geometry.location.lat,
-  lng: detailedPlaceResult.geometry.location.lng
+  lng: detailedPlaceResult.geometry.location.lng,
+  address: detailedPlaceResult.formatted_address
 }
 
 var altDetailedTotie1 = new AltDetailedTotie(params)
@@ -53,11 +54,17 @@ var altDetailedTotie1 = new AltDetailedTotie(params)
 
 describe("alternate detailed totie", function(){
   it("should take in a name from a params object", function(){
-    assert.equal("Wetherspoons", altDetailedTotie1.name)
-  })
+    assert.equal("Wetherspoons", altDetailedTotie1.name);
+  });
+
   it("should take in a latitude and longitude and create a location property", function(){
-    assert.deepEqual({lat:39, lng:87}, altDetailedTotie1.location)
+    assert.deepEqual({lat:39, lng:87}, altDetailedTotie1.location);
+  });
+
+  it("should have an address property", function(){
+    assert.equal("20 Princes Street, Edinburgh EH1 1HT, United Kingdom", altDetailedTotie1.address)
   })
+
 
 
 
