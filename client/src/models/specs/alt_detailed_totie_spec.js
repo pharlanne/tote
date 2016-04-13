@@ -75,7 +75,8 @@ var params = {
   phoneNumber: detailedPlaceResult.formatted_phone_number,
   placeId: detailedPlaceResult.place_id,
   rating: detailedPlaceResult.rating,
-  reviews: detailedPlaceResult.reviews
+  reviews: detailedPlaceResult.reviews,
+  types: detailedPlaceResult.types
 }
 
 var params2 = {
@@ -134,8 +135,11 @@ describe("alternate detailed totie", function(){
     }], altDetailedTotie1.reviews) });
 
   it("should set reviews to undefined if they are not present in original model", function(){
-    assert.equal(undefined, altDetailedTotie2.reviews)
-  })
+    assert.equal(undefined, altDetailedTotie2.reviews);
+  });
 
+  it("should have a types array" , function(){
+    assert.deepEqual(["restaurant", "bar", "food"], altDetailedTotie1.types);
+  });
 
 });
