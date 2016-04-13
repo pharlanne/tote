@@ -13,7 +13,8 @@ var AltDetailedTotie = function(params){
   this.rating = params["rating"],
   this.reviews = params["reviews"],
   this.types = params["types"],
-  this.website = params["website"]
+  this.website = params["website"], 
+  this.comments = []
 
 }
 

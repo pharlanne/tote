@@ -177,7 +177,11 @@ describe("alternate detailed totie", function(){
   });
 
   it("should be able to return all reviews ratings", function(){
-    assert.deepEqual([5, 1], altDetailedTotie1.getAllReviewsRating())
+    assert.deepEqual([5, 1], altDetailedTotie1.getAllReviewsRating());
+  });
+
+  it("should have a an empty comments holder", function(){
+    assert.deepEqual([], altDetailedTotie1.comments)
   })
 
 });
