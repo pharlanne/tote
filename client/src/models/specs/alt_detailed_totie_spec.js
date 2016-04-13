@@ -43,7 +43,7 @@ var detailedPlaceResult = {
       author_url: "www.mywebsite.com", 
       language: "en", 
       profile_photo: "www.photo.com", 
-      rating: 3, 
+      rating: 1, 
       text: "Awful", 
       time: 5678
     }    
@@ -154,7 +154,7 @@ describe("alternate detailed totie", function(){
       author_url: "www.mywebsite.com", 
       language: "en", 
       profile_photo: "www.photo.com", 
-      rating: 3, 
+      rating: 1, 
       text: "Awful", 
       time: 5678
     }    
@@ -173,7 +173,11 @@ describe("alternate detailed totie", function(){
   });
 
   it("should be able to return all reviews as text", function(){
-    assert.deepEqual(["Very good", "Awful"], altDetailedTotie1.getAllReviewsText())
+    assert.deepEqual(["Very good", "Awful"], altDetailedTotie1.getAllReviewsText());
+  });
+
+  it("should be able to return all reviews ratings", function(){
+    assert.deepEqual([5, 1], altDetailedTotie1.getAllReviewsRating())
   })
 
 });

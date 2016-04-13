@@ -24,8 +24,15 @@ AltDetailedTotie.prototype = {
       results.push(review.text);
     });
     return results;
+  },
+  getAllReviewsRating: function(){
+    var results = [];
+    this.reviews.forEach(function(review){
+      results.push(review.rating);
+    })
+    return results;
   }
-
+ 
 }
 
 
