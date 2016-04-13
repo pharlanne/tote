@@ -7,8 +7,8 @@ var AltDetailedTotie = function(params){
     lat: params["lat"], 
     lng: params["lng"]
   },
-  this.address = params["address"]
-  // this.phoneNumber = params["phoneNumber"],
+  this.address = params["address"],
+  this.phoneNumber = params["phoneNumber"]
   // this.placeId = params["placeId"],
   // this.priceLevel = params["priceLevel"],
   // this.rating = params["rating"],

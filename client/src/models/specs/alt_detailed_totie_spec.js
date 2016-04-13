@@ -45,7 +45,8 @@ var params = {
   name: detailedPlaceResult.name,
   lat: detailedPlaceResult.geometry.location.lat,
   lng: detailedPlaceResult.geometry.location.lng,
-  address: detailedPlaceResult.formatted_address
+  address: detailedPlaceResult.formatted_address,
+  phoneNumber: detailedPlaceResult.formatted_phone_number
 }
 
 var altDetailedTotie1 = new AltDetailedTotie(params)
@@ -62,7 +63,11 @@ describe("alternate detailed totie", function(){
   });
 
   it("should have an address property", function(){
-    assert.equal("20 Princes Street, Edinburgh EH1 1HT, United Kingdom", altDetailedTotie1.address)
+    assert.equal("20 Princes Street, Edinburgh EH1 1HT, United Kingdom", altDetailedTotie1.address);
+  });
+
+  it("should have a phone number property", function(){
+    assert.equal("0131 4431212", altDetailedTotie1.phoneNumber)
   })
 
 
