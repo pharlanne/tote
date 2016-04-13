@@ -4,9 +4,10 @@ var service;
 var marker;
 var mapList = document.getElementById('mapList')
 var SearchView = require('./search_views.js');
+var DetailedResultView = require('./detailed_results_view.js')
 var BasicTotie = require('../models/basic_totie.js')
 var DetailedTotie = require('../models/detailed_totie.js')
-
+var AltDetailedTotie = require('../models/alt_detailed_totie.js')
 
 
 var BasicResults = function(){
@@ -127,7 +128,8 @@ this.initMap = function() {
       location: map.getCenter(),
       // bounds: map.getBounds(),
       keyword: category,
-      radius: 500
+      radius: 1000,
+      // type: [category]
     };
     
     service.nearbySearch(request, callback);
@@ -146,6 +148,13 @@ this.initMap = function() {
     for (var i = 0, result; result = results[i]; i++) {
       var basicTotie = new BasicTotie(result.name, result.geometry.location.lat(), result.geometry.location.lng(), result.place_id, result.price_level, result.rating, result.types)
       console.log(basicTotie)
+
+      // var detailedResultView = new DetailedResultView(basicTotie, map);
+      // detailedResultView.getPlaceDetails();
+      // console.log(detailedResultView.placeDetails)
+      // detailedResultView.createDetailedTotie(DetailedTotie);
+      // console.log(detailedResultView.detailedTotie)
+
       listResult(result, displayMap);
       if(i===9) {break};
 
@@ -159,7 +168,26 @@ this.initMap = function() {
         console.error(status);
         return;
       }
+      
+      var params = {
+        name: result.name,
+        lat: result.geometry.location.lat(),
+        lng: result.geometry.location.lng(),
+        address: result.formatted_address,
+        phoneNumber: result.formatted_phone_number,
+        placeId: result.place_id,
+        rating: result.rating,
+        reviews: result.reviews,
+        types: result.types, 
+        website: result.website
+      }
 
+      
+      var detailedResultView = new DetailedResultView(map);
+      detailedResultView.initiateTotieConstruction(DetailedTotie, AltDetailedTotie, params, result)
+      
+      console.log(detailedResultView.detailedTotie)
+          
 
       var ul = document.createElement('ul'); 
       var li = document.createElement('li');
@@ -167,7 +195,7 @@ this.initMap = function() {
       var image = document.createElement('img')
       image.src = photoUrl
       li.innerText = result.name + " " + result.rating ;
-      console.log(result)
+      // console.log(result)
       displayMap.appendChild(ul);
       ul.appendChild(li);
       li.appendChild(image)
