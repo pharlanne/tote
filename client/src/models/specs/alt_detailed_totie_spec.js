@@ -76,7 +76,8 @@ var params = {
   placeId: detailedPlaceResult.place_id,
   rating: detailedPlaceResult.rating,
   reviews: detailedPlaceResult.reviews,
-  types: detailedPlaceResult.types
+  types: detailedPlaceResult.types, 
+  website: detailedPlaceResult.website
 }
 
 var params2 = {
@@ -141,5 +142,9 @@ describe("alternate detailed totie", function(){
   it("should have a types array" , function(){
     assert.deepEqual(["restaurant", "bar", "food"], altDetailedTotie1.types);
   });
+
+  it("should have a website", function(){
+    assert.equal("https://www.jdwetherspoon.com/pubs/all-pubs/scotland/edinburgh/the-standing-order-edinburgh", altDetailedTotie1.website)
+  })
 
 });
