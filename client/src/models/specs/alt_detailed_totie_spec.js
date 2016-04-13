@@ -196,7 +196,13 @@ describe("alternate detailed totie", function(){
 
   it("should be able to return the index of a comment", function(){
 
-    assert.equal(0, altDetailedTotie1.getCommentIndex("This looks cool, need to ask Fran if she'd like it"))
-  })
+    assert.equal(0, altDetailedTotie1.getCommentIndex("This looks cool, need to ask Fran if she'd like it"));
+  });
+
+  it("should return null if comment cannot be found", function(){
+
+    assert.equal(null, altDetailedTotie1.getCommentIndex("Awesome! Cannot wait for this! BOOK SOON!"));
+  });
+
 
 });

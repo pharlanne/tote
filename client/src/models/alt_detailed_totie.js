@@ -44,7 +44,7 @@ AltDetailedTotie.prototype = {
     this.comments.push(userInput.toString());
   }, 
   getCommentIndex: function(commentText){
-    var result;
+    var result = null;
     this.comments.forEach(function(comment){
       if(comment === commentText){
         var index = this.comments.indexOf(comment);
