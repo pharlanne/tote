@@ -59,9 +59,9 @@
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var BasicResults = __webpack_require__(5);
-	var Tote = __webpack_require__(3);
-	var City = __webpack_require__(4)
+	var BasicResults = __webpack_require__(2);
+	var Tote = __webpack_require__(6);
+	var City = __webpack_require__(7)
 	
 	var Landing = function(){
 	  this.execute = function(){
@@ -102,117 +102,7 @@
 	module.exports = Landing;
 
 /***/ },
-/* 2 */,
-/* 3 */
-/***/ function(module, exports) {
-
-	
-	
-	
-	var Tote = function(title){
-	  this.title = title;
-	  this.cities = [];
-	}
-	
-	Tote.prototype = {
-	  addCity: function(city){
-	    this.cities.push(city);
-	  },
-	  getCity: function(cityName){
-	    var results;
-	    this.cities.forEach(function(city){
-	      if(city.name === cityName){
-	        results = city
-	      }
-	    })
-	    return results;
-	  },
-	  getCityIndex: function(cityName){
-	    var city = this.getCity(cityName);
-	    return this.cities.indexOf(city);
-	  },
-	  removeCity: function(cityName){
-	    var index = this.getCityIndex(cityName);
-	    this.cities.splice(index, 1);
-	  }
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	module.exports = Tote;
-
-/***/ },
-/* 4 */
-/***/ function(module, exports) {
-
-	
-	
-	
-	var City = function(params){
-	  this.name = params["name"],
-	  this.country = params["country"], 
-	  this.location = {
-	    lat: params["lat"],
-	    lng: params["lng"]
-	  }, 
-	  this.toties = []
-	}
-	
-	City.prototype = {
-	  addTotie: function(totie){
-	    this.toties.push(totie);
-	  }, 
-	  getTotie: function(searchQuery){
-	    var result;
-	    this.toties.forEach(function(totie){
-	      if(totie.name.includes(searchQuery)){
-	        result = totie;
-	      }
-	    })
-	    return result;
-	  }, 
-	
-	  getTotiesType: function(searchQuery){
-	    var results = [];
-	    this.toties.forEach(function(totie){
-	      totie.types.forEach(function(type){
-	        if(type === searchQuery){
-	          results.push(totie);
-	        } 
-	      }.bind(this))
-	    }.bind(this))
-	
-	    if(results.length > 0 ){
-	      return results;
-	    } else {
-	      return null
-	    }
-	  },
-	  getTotieIndex: function(searchQuery){
-	    var totie = this.getTotie(searchQuery)
-	    return this.toties.indexOf(totie)
-	  },
-	  removeTotie: function(searchQuery){
-	    var index = this.getTotieIndex(searchQuery);
-	    this.toties.splice(index,1)
-	  }
-	
-	
-	
-	
-	}
-	
-	
-	module.exports = City;
-
-/***/ },
-/* 5 */
+/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map;
@@ -220,9 +110,9 @@
 	var service;
 	var marker;
 	var mapList = document.getElementById('mapList')
-	var SearchView = __webpack_require__(6);
-	var BasicTotie = __webpack_require__(7)
-	var DetailedTotie = __webpack_require__(9)
+	var SearchView = __webpack_require__(3);
+	var BasicTotie = __webpack_require__(4)
+	var DetailedTotie = __webpack_require__(5)
 	
 	
 	
@@ -428,7 +318,7 @@
 	module.exports = BasicResults;
 
 /***/ },
-/* 6 */
+/* 3 */
 /***/ function(module, exports) {
 
 	var SearchViews = function(map){
@@ -444,7 +334,7 @@
 	module.exports = SearchViews;
 
 /***/ },
-/* 7 */
+/* 4 */
 /***/ function(module, exports) {
 
 	
@@ -465,8 +355,7 @@
 	module.exports = BasicTotie;
 
 /***/ },
-/* 8 */,
-/* 9 */
+/* 5 */
 /***/ function(module, exports) {
 
 	
@@ -559,6 +448,115 @@
 	
 	
 	module.exports = DetailedTotie;
+
+/***/ },
+/* 6 */
+/***/ function(module, exports) {
+
+	
+	
+	
+	var Tote = function(title){
+	  this.title = title;
+	  this.cities = [];
+	}
+	
+	Tote.prototype = {
+	  addCity: function(city){
+	    this.cities.push(city);
+	  },
+	  getCity: function(cityName){
+	    var results;
+	    this.cities.forEach(function(city){
+	      if(city.name === cityName){
+	        results = city
+	      }
+	    })
+	    return results;
+	  },
+	  getCityIndex: function(cityName){
+	    var city = this.getCity(cityName);
+	    return this.cities.indexOf(city);
+	  },
+	  removeCity: function(cityName){
+	    var index = this.getCityIndex(cityName);
+	    this.cities.splice(index, 1);
+	  }
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	module.exports = Tote;
+
+/***/ },
+/* 7 */
+/***/ function(module, exports) {
+
+	
+	
+	
+	var City = function(params){
+	  this.name = params["name"],
+	  this.country = params["country"], 
+	  this.location = {
+	    lat: params["lat"],
+	    lng: params["lng"]
+	  }, 
+	  this.toties = []
+	}
+	
+	City.prototype = {
+	  addTotie: function(totie){
+	    this.toties.push(totie);
+	  }, 
+	  getTotie: function(searchQuery){
+	    var result;
+	    this.toties.forEach(function(totie){
+	      if(totie.name.includes(searchQuery)){
+	        result = totie;
+	      }
+	    })
+	    return result;
+	  }, 
+	
+	  getTotiesType: function(searchQuery){
+	    var results = [];
+	    this.toties.forEach(function(totie){
+	      totie.types.forEach(function(type){
+	        if(type === searchQuery){
+	          results.push(totie);
+	        } 
+	      }.bind(this))
+	    }.bind(this))
+	
+	    if(results.length > 0 ){
+	      return results;
+	    } else {
+	      return null
+	    }
+	  },
+	  getTotieIndex: function(searchQuery){
+	    var totie = this.getTotie(searchQuery)
+	    return this.toties.indexOf(totie)
+	  },
+	  removeTotie: function(searchQuery){
+	    var index = this.getTotieIndex(searchQuery);
+	    this.toties.splice(index,1)
+	  }
+	
+	
+	
+	
+	}
+	
+	
+	module.exports = City;
 
 /***/ }
 /******/ ]);
