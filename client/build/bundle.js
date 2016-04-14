@@ -715,7 +715,8 @@
 	  this.contentArea = document.createElement("div"),
 	  this.footer = document.createElement("div"),
 	  this.selectionButton = null,
-	  this.hideSelectionButton = null
+	  this.hideSelectionButton = null, 
+	  this.storeButton = null
 	}
 	
 	
@@ -749,10 +750,17 @@
 	    this.hideSelectionButton.id = "hide";
 	    this.hideSelectionButton.value = "hide details";
 	  },
+	  setStoreButtonProperties: function(){
+	    this.storeButton = document.createElement("input");
+	    this.storeButton.type = "submit";
+	    this.storeButton.id = "store";
+	    this.storeButton.value = "store details";
+	  },
 	  populateSelectionArea: function() {
 	    // console.log(this.selectionButton)
 	    this.selectionArea.appendChild(this.selectionButton);
 	    this.selectionArea.appendChild(this.hideSelectionButton);
+	    this.selectionArea.appendChild(this.storeButton);
 	  },
 	  setAllDisplayProperties: function(){
 	    this.setMainAreaId();
@@ -762,22 +770,30 @@
 	    this.setSelectionAreaClass();
 	    this.setSelectionButtonProperties();
 	    this.setHideSelectionButtonProperties();
+	    this.setStoreButtonProperties();
 	  },
+	
 	  setSelectionButtonClickEvent: function(){
 	    this.selectionButton.onclick = function(){
 	      var div = document.createElement("div");
 	      var ul = document.createElement("ul");
+	
 	      var li = document.createElement("li");
 	      li.innerText = this.detailedResult.address;
-	      ul.appendChild(li)
+	      ul.appendChild(li);
+	
+	      var li = document.createElement("li");
+	      li.innerText = this.detailedResult.phoneNumber;
+	      ul.appendChild(li);
 	      
 	      var li = document.createElement("li");
 	      li.innerText = this.detailedResult.allOpeningHours;
-	      ul.appendChild(li)
+	      ul.appendChild(li);
 	
 	      var li = document.createElement("li");
 	      li.innerText = this.detailedResult.getAllReviewsText()
-	      ul.appendChild(li)
+	      ul.appendChild(li);
+	
 	      div.appendChild(ul)
 	      this.selectionArea.appendChild(div);
 	    }.bind(this)
@@ -789,6 +805,16 @@
 	      this.selectionArea.removeChild(childNode);
 	    }.bind(this)
 	  }
+	  // setStoreButtonClickEvent: function(){
+	  //   this.storeButton.onclick = function(){
+	    
+	  //     var request = new XMLHttpRequest();
+	  //     request.open("POST", "http://localhost:3000/MyTotes");
+	  //     request.onload = function(){
+	  //       if(request.status = 200)
+	  //     }
+	  //   }.bind(this)
+	  // }
 	}
 	
 	
