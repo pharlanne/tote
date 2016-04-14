@@ -312,10 +312,10 @@
 	      // console.log(detailedResultHolder.detailedTotie)
 	      
 	      var detailedResultDisplay = new DetailedResultDisplay(detailedResultHolder.detailedTotie);
-	      detailedResultDisplay.setAreaReferences();
+	      detailedResultDisplay.setAllDisplayProperties();
 	      detailedResultDisplay.populateSelectionArea();
-	      detailedResultDisplay.setSelectionButtonDisplay();
-	      detailedResultDisplay.setHideSelectionButton();
+	      detailedResultDisplay.setSelectionButtonClickEvent();
+	      detailedResultDisplay.setHideSelectionButtonClickEvent();
 	      // console.log(detailedResultDisplay)
 	
 	      var ul = document.createElement('ul'); 
@@ -736,14 +736,14 @@
 	  setSelectionAreaClass: function(){
 	    this.selectionArea.class = "display-content-options"
 	  },
-	  setSelectionButtonReferences: function(){
+	  setSelectionButtonProperties: function(){
 	    this.selectionButton = document.createElement("input");
 	    this.selectionButton.type = "submit";
 	    this.selectionButton.id = this.detailedResult.name;
 	    this.selectionButton.value = "see details";
-	    this.selectionArea.appendChild(this.selectionButton);
+	    // this.selectionArea.appendChild(this.selectionButton);
 	  },
-	  setHideSelectionButtonReferences: function(){
+	  setHideSelectionButtonProperties: function(){
 	    this.hideSelectionButton = document.createElement("input");
 	    this.hideSelectionButton.type = "submit";
 	    this.hideSelectionButton.id = "hide";
@@ -754,16 +754,16 @@
 	    this.selectionArea.appendChild(this.selectionButton);
 	    this.selectionArea.appendChild(this.hideSelectionButton);
 	  },
-	  setAreaReferences: function(){
+	  setAllDisplayProperties: function(){
 	    this.setMainAreaId();
 	    this.setMainAreaClass();
 	    this.setHeaderClass();
 	    this.setHeaderContent();
 	    this.setSelectionAreaClass();
-	    this.setSelectionButtonReferences();
-	    this.setHideSelectionButtonReferences();
+	    this.setSelectionButtonProperties();
+	    this.setHideSelectionButtonProperties();
 	  },
-	  setSelectionButtonDisplay: function(){
+	  setSelectionButtonClickEvent: function(){
 	    this.selectionButton.onclick = function(){
 	      var div = document.createElement("div");
 	      var ul = document.createElement("ul");
@@ -783,7 +783,7 @@
 	    }.bind(this)
 	    
 	  },
-	  setHideSelectionButton: function(){
+	  setHideSelectionButtonClickEvent: function(){
 	    this.hideSelectionButton.onclick = function(){
 	      var childNode = this.selectionArea.childNodes[2];
 	      this.selectionArea.removeChild(childNode);

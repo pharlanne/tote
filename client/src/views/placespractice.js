@@ -203,10 +203,10 @@ mapList.innerHTML = '';
       // console.log(detailedResultHolder.detailedTotie)
       
       var detailedResultDisplay = new DetailedResultDisplay(detailedResultHolder.detailedTotie);
-      detailedResultDisplay.setAreaReferences();
+      detailedResultDisplay.setAllDisplayProperties();
       detailedResultDisplay.populateSelectionArea();
-      detailedResultDisplay.setSelectionButtonDisplay();
-      detailedResultDisplay.setHideSelectionButton();
+      detailedResultDisplay.setSelectionButtonClickEvent();
+      detailedResultDisplay.setHideSelectionButtonClickEvent();
       // console.log(detailedResultDisplay)
 
       var ul = document.createElement('ul'); 
