@@ -1,7 +1,7 @@
 
 
 
-var DetailedResultView = function(map){
+var DetailedResultHolder = function(map){
   this.element = document.createElement("div")
   // this.basicTotie = basicTotie;
   this.map = map;
@@ -11,7 +11,7 @@ var DetailedResultView = function(map){
   this.service = new google.maps.places.PlacesService(document.createElement("div"))
 }
 
-DetailedResultView.prototype = {
+DetailedResultHolder.prototype = {
   createPlaceRequest: function(){
     var request = {
       placeId: this.basicTotie.placeId
@@ -62,4 +62,4 @@ DetailedResultView.prototype = {
 
 
 
-module.exports = DetailedResultView;
+module.exports = DetailedResultHolder;

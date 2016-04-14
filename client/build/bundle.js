@@ -62,8 +62,8 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var BasicResults = __webpack_require__(2);
-	var Tote = __webpack_require__(3);
-	var City = __webpack_require__(4)
+	var Tote = __webpack_require__(7);
+	var City = __webpack_require__(8)
 	
 	var Landing = function(){
 	  this.execute = function(){
@@ -112,14 +112,14 @@
 	var service;
 	var marker;
 	var mapList = document.getElementById('mapList');
-	var SearchView = __webpack_require__(5);
+	var SearchView = __webpack_require__(3);
 	
-	var BasicTotie = __webpack_require__(6);
-	var DetailedTotie = __webpack_require__(7)
-	var AltDetailedTotie = __webpack_require__(8)
-	var Tote = __webpack_require__(3)
-	var City = __webpack_require__(4)
-	var DetailedResultView = __webpack_require__(9)
+	var BasicTotie = __webpack_require__(4);
+	var DetailedTotie = __webpack_require__(5)
+	var AltDetailedTotie = __webpack_require__(6)
+	var Tote = __webpack_require__(7)
+	var City = __webpack_require__(8)
+	var DetailedResultHolder = __webpack_require__(12)
 	var DetailedResultDisplay = __webpack_require__(10)
 	
 	
@@ -135,9 +135,8 @@
 	mapList.innerHTML = '';
 	
 	
-	  // var tote = new Tote(title.value);
-	  // var params = 
-	  // var city = new City(params)
+	  var tote = new Tote(title.value);
+	 
 	
 	 
 	
@@ -201,7 +200,7 @@
 	
 	      });
 	    }
-	
+	      
 	      var hotels = document.createElement('img');
 	      var bars = document.createElement('img');
 	      var restaurants = document.createElement('img');
@@ -307,15 +306,17 @@
 	        types: result.types, 
 	        website: result.website
 	      }
+	      
+	      var allToties = []
 	
+	      
+	      var detailedResultHolder = new DetailedResultHolder(map);
+	      detailedResultHolder.initiateTotieConstruction(DetailedTotie, AltDetailedTotie, params, result)
+	      
+	      console.log(detailedResultHolder.detailedTotie)
+	      allToties.push(detailedResultHolder.detailedTotie)
 	
-	      
-	      var detailedResultView = new DetailedResultView(map);
-	      detailedResultView.initiateTotieConstruction(DetailedTotie, AltDetailedTotie, params, result)
-	      
-	      console.log(detailedResultView.detailedTotie)
-	      
-	      var detailedResultDisplay = new DetailedResultDisplay(detailedResultView.detailedTotie);
+	      var detailedResultDisplay = new DetailedResultDisplay(detailedResultHolder.detailedTotie);
 	      detailedResultDisplay.setAreaReferences();
 	      detailedResultDisplay.populateSelectionArea();
 	      detailedResultDisplay.setSelectionButtonDisplay();
@@ -386,115 +387,6 @@
 /* 3 */
 /***/ function(module, exports) {
 
-	
-	
-	
-	var Tote = function(title){
-	  this.title = title;
-	  this.cities = [];
-	}
-	
-	Tote.prototype = {
-	  addCity: function(city){
-	    this.cities.push(city);
-	  },
-	  getCity: function(cityName){
-	    var results;
-	    this.cities.forEach(function(city){
-	      if(city.name === cityName){
-	        results = city
-	      }
-	    })
-	    return results;
-	  },
-	  getCityIndex: function(cityName){
-	    var city = this.getCity(cityName);
-	    return this.cities.indexOf(city);
-	  },
-	  removeCity: function(cityName){
-	    var index = this.getCityIndex(cityName);
-	    this.cities.splice(index, 1);
-	  }
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	module.exports = Tote;
-
-/***/ },
-/* 4 */
-/***/ function(module, exports) {
-
-	
-	
-	
-	var City = function(params){
-	  this.name = params["name"],
-	  this.country = params["country"], 
-	  this.location = {
-	    lat: params["lat"],
-	    lng: params["lng"]
-	  }, 
-	  this.toties = []
-	}
-	
-	City.prototype = {
-	  addTotie: function(totie){
-	    this.toties.push(totie);
-	  }, 
-	  getTotie: function(searchQuery){
-	    var result;
-	    this.toties.forEach(function(totie){
-	      if(totie.name.includes(searchQuery)){
-	        result = totie;
-	      }
-	    })
-	    return result;
-	  }, 
-	
-	  getTotiesType: function(searchQuery){
-	    var results = [];
-	    this.toties.forEach(function(totie){
-	      totie.types.forEach(function(type){
-	        if(type === searchQuery){
-	          results.push(totie);
-	        } 
-	      }.bind(this))
-	    }.bind(this))
-	
-	    if(results.length > 0 ){
-	      return results;
-	    } else {
-	      return null
-	    }
-	  },
-	  getTotieIndex: function(searchQuery){
-	    var totie = this.getTotie(searchQuery)
-	    return this.toties.indexOf(totie)
-	  },
-	  removeTotie: function(searchQuery){
-	    var index = this.getTotieIndex(searchQuery);
-	    this.toties.splice(index,1)
-	  }
-	
-	
-	
-	
-	}
-	
-	
-	module.exports = City;
-
-/***/ },
-/* 5 */
-/***/ function(module, exports) {
-
 	var SearchViews = function(map){
 	this.map = map
 	this.execute = function(){
@@ -508,7 +400,7 @@
 	module.exports = SearchViews;
 
 /***/ },
-/* 6 */
+/* 4 */
 /***/ function(module, exports) {
 
 	
@@ -529,7 +421,7 @@
 	module.exports = BasicTotie;
 
 /***/ },
-/* 7 */
+/* 5 */
 /***/ function(module, exports) {
 
 	
@@ -630,7 +522,7 @@
 	module.exports = DetailedTotie;
 
 /***/ },
-/* 8 */
+/* 6 */
 /***/ function(module, exports) {
 
 	
@@ -704,66 +596,37 @@
 	module.exports = AltDetailedTotie;
 
 /***/ },
-/* 9 */
+/* 7 */
 /***/ function(module, exports) {
 
 	
 	
 	
-	var DetailedResultView = function(map){
-	  this.element = document.createElement("div")
-	  // this.basicTotie = basicTotie;
-	  this.map = map;
-	  this.placeDetails = null;
-	  this.detailedTotie = null;
-	  // this.altDetailedTotie = null;
-	  this.service = new google.maps.places.PlacesService(document.createElement("div"))
+	var Tote = function(title){
+	  this.title = title;
+	  this.cities = [];
 	}
 	
-	DetailedResultView.prototype = {
-	  createPlaceRequest: function(){
-	    var request = {
-	      placeId: this.basicTotie.placeId
-	    }
-	    return request;
-	  }, 
-	  getPlaceDetails: function(){
-	    // console.log()
-	    var placeResult;
-	    this.service.getDetails(this.createPlaceRequest(), function(status, result){
-	      if (status !== google.maps.places.PlacesServiceStatus.OK) {
-	        console.error(status);
-	        return;
-	      }
-	      this.placeResult = result;
-	    })
-	    
+	Tote.prototype = {
+	  addCity: function(city){
+	    this.cities.push(city);
 	  },
-	  createDetailedTotie: function(googleObject, detailedTotieConstrFunc){
-	    // var result = this.getPlaceDetails();
-	    // console.log(result)
-	    var detailedTotie = new detailedTotieConstrFunc(googleObject.name, googleObject.geometry.location.lat(), googleObject.geometry.location.lng(), googleObject.formatted_address, googleObject.formatted_phone_number, googleObject.place_id, googleObject.opening_hours.weekday_text, googleObject.price_level, googleObject.rating, googleObject.reviews, googleObject.types, googleObject.website);
-	    this.detailedTotie = detailedTotie;
-	  }, 
-	  createAltDetailedTotie: function(params, altDetailedTotieConstrFunc){
-	    var altDetailedTotie = new altDetailedTotieConstrFunc(params);
-	    this.detailedTotie = altDetailedTotie;
-	  }, 
-	  filterGoogleResult: function(object){
-	    var result;
-	    if(object.opening_hours === undefined){
-	      result = false;
-	    } else {
-	      result = true;
-	    }
-	   return result;
-	  }, 
-	  initiateTotieConstruction: function(detailedTotieConstrFunc, altDetailedTotieConstrFunc, params, object){
-	    if(this.filterGoogleResult(object) === true){
-	      this.createDetailedTotie(object, detailedTotieConstrFunc);
-	    } else if (this.filterGoogleResult(object) === false){
-	      this.createAltDetailedTotie(params, altDetailedTotieConstrFunc);
-	    }
+	  getCity: function(cityName){
+	    var results;
+	    this.cities.forEach(function(city){
+	      if(city.name === cityName){
+	        results = city
+	      }
+	    })
+	    return results;
+	  },
+	  getCityIndex: function(cityName){
+	    var city = this.getCity(cityName);
+	    return this.cities.indexOf(city);
+	  },
+	  removeCity: function(cityName){
+	    var index = this.getCityIndex(cityName);
+	    this.cities.splice(index, 1);
 	  }
 	}
 	
@@ -771,9 +634,78 @@
 	
 	
 	
-	module.exports = DetailedResultView;
+	
+	
+	
+	
+	module.exports = Tote;
 
 /***/ },
+/* 8 */
+/***/ function(module, exports) {
+
+	
+	
+	
+	var City = function(params){
+	  this.name = params["name"],
+	  this.country = params["country"], 
+	  this.location = {
+	    lat: params["lat"],
+	    lng: params["lng"]
+	  }, 
+	  this.toties = []
+	}
+	
+	City.prototype = {
+	  addTotie: function(totie){
+	    this.toties.push(totie);
+	  }, 
+	  getTotie: function(searchQuery){
+	    var result;
+	    this.toties.forEach(function(totie){
+	      if(totie.name.includes(searchQuery)){
+	        result = totie;
+	      }
+	    })
+	    return result;
+	  }, 
+	
+	  getTotiesType: function(searchQuery){
+	    var results = [];
+	    this.toties.forEach(function(totie){
+	      totie.types.forEach(function(type){
+	        if(type === searchQuery){
+	          results.push(totie);
+	        } 
+	      }.bind(this))
+	    }.bind(this))
+	
+	    if(results.length > 0 ){
+	      return results;
+	    } else {
+	      return null
+	    }
+	  },
+	  getTotieIndex: function(searchQuery){
+	    var totie = this.getTotie(searchQuery)
+	    return this.toties.indexOf(totie)
+	  },
+	  removeTotie: function(searchQuery){
+	    var index = this.getTotieIndex(searchQuery);
+	    this.toties.splice(index,1)
+	  }
+	
+	
+	
+	
+	}
+	
+	
+	module.exports = City;
+
+/***/ },
+/* 9 */,
 /* 10 */
 /***/ function(module, exports) {
 
@@ -869,6 +801,77 @@
 	module.exports = DetailedResultDisplay;
 	
 
+
+/***/ },
+/* 11 */,
+/* 12 */
+/***/ function(module, exports) {
+
+	
+	
+	
+	var DetailedResultHolder = function(map){
+	  this.element = document.createElement("div")
+	  // this.basicTotie = basicTotie;
+	  this.map = map;
+	  this.placeDetails = null;
+	  this.detailedTotie = null;
+	  // this.altDetailedTotie = null;
+	  this.service = new google.maps.places.PlacesService(document.createElement("div"))
+	}
+	
+	DetailedResultHolder.prototype = {
+	  createPlaceRequest: function(){
+	    var request = {
+	      placeId: this.basicTotie.placeId
+	    }
+	    return request;
+	  }, 
+	  getPlaceDetails: function(){
+	    // console.log()
+	    var placeResult;
+	    this.service.getDetails(this.createPlaceRequest(), function(status, result){
+	      if (status !== google.maps.places.PlacesServiceStatus.OK) {
+	        console.error(status);
+	        return;
+	      }
+	      this.placeResult = result;
+	    })
+	    
+	  },
+	  createDetailedTotie: function(googleObject, detailedTotieConstrFunc){
+	    // var result = this.getPlaceDetails();
+	    // console.log(result)
+	    var detailedTotie = new detailedTotieConstrFunc(googleObject.name, googleObject.geometry.location.lat(), googleObject.geometry.location.lng(), googleObject.formatted_address, googleObject.formatted_phone_number, googleObject.place_id, googleObject.opening_hours.weekday_text, googleObject.price_level, googleObject.rating, googleObject.reviews, googleObject.types, googleObject.website);
+	    this.detailedTotie = detailedTotie;
+	  }, 
+	  createAltDetailedTotie: function(params, altDetailedTotieConstrFunc){
+	    var altDetailedTotie = new altDetailedTotieConstrFunc(params);
+	    this.detailedTotie = altDetailedTotie;
+	  }, 
+	  filterGoogleResult: function(object){
+	    var result;
+	    if(object.opening_hours === undefined){
+	      result = false;
+	    } else {
+	      result = true;
+	    }
+	   return result;
+	  }, 
+	  initiateTotieConstruction: function(detailedTotieConstrFunc, altDetailedTotieConstrFunc, params, object){
+	    if(this.filterGoogleResult(object) === true){
+	      this.createDetailedTotie(object, detailedTotieConstrFunc);
+	    } else if (this.filterGoogleResult(object) === false){
+	      this.createAltDetailedTotie(params, altDetailedTotieConstrFunc);
+	    }
+	  }
+	}
+	
+	
+	
+	
+	
+	module.exports = DetailedResultHolder;
 
 /***/ }
 /******/ ]);

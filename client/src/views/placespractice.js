@@ -10,7 +10,7 @@ var DetailedTotie = require('../models/detailed_totie.js')
 var AltDetailedTotie = require('../models/alt_detailed_totie.js')
 var Tote = require('../models/tote.js')
 var City = require('../models/city.js')
-var DetailedResultView = require('./detailed_results_view.js')
+var DetailedResultHolder = require('../models/detailed_result_holder.js')
 var DetailedResultDisplay = require('./detailed_results_display.js')
 
 
@@ -26,9 +26,8 @@ this.initMap = function() {
 mapList.innerHTML = '';
 
 
-  // var tote = new Tote(title.value);
-  // var params = 
-  // var city = new City(params)
+  var tote = new Tote(title.value);
+ 
 
  
 
@@ -92,7 +91,7 @@ mapList.innerHTML = '';
 
       });
     }
-
+      
       var hotels = document.createElement('img');
       var bars = document.createElement('img');
       var restaurants = document.createElement('img');
@@ -198,15 +197,17 @@ mapList.innerHTML = '';
         types: result.types, 
         website: result.website
       }
+      
+      var allToties = []
 
+      
+      var detailedResultHolder = new DetailedResultHolder(map);
+      detailedResultHolder.initiateTotieConstruction(DetailedTotie, AltDetailedTotie, params, result)
+      
+      console.log(detailedResultHolder.detailedTotie)
+      allToties.push(detailedResultHolder.detailedTotie)
 
-      
-      var detailedResultView = new DetailedResultView(map);
-      detailedResultView.initiateTotieConstruction(DetailedTotie, AltDetailedTotie, params, result)
-      
-      console.log(detailedResultView.detailedTotie)
-      
-      var detailedResultDisplay = new DetailedResultDisplay(detailedResultView.detailedTotie);
+      var detailedResultDisplay = new DetailedResultDisplay(detailedResultHolder.detailedTotie);
       detailedResultDisplay.setAreaReferences();
       detailedResultDisplay.populateSelectionArea();
       detailedResultDisplay.setSelectionButtonDisplay();
