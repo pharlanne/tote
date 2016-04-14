@@ -184,7 +184,6 @@ mapList.innerHTML = '';
         console.error(status);
         return;
       }
-      
       var params = {
         name: result.name,
         lat: result.geometry.location.lat(),
@@ -197,22 +196,18 @@ mapList.innerHTML = '';
         types: result.types, 
         website: result.website
       }
-      
-      var allToties = []
-
-      
+          
       var detailedResultHolder = new DetailedResultHolder(map);
       detailedResultHolder.initiateTotieConstruction(DetailedTotie, AltDetailedTotie, params, result)
       
-      console.log(detailedResultHolder.detailedTotie)
-      allToties.push(detailedResultHolder.detailedTotie)
-
+      // console.log(detailedResultHolder.detailedTotie)
+      
       var detailedResultDisplay = new DetailedResultDisplay(detailedResultHolder.detailedTotie);
       detailedResultDisplay.setAreaReferences();
       detailedResultDisplay.populateSelectionArea();
       detailedResultDisplay.setSelectionButtonDisplay();
       detailedResultDisplay.setHideSelectionButton();
-      console.log(detailedResultDisplay)
+      // console.log(detailedResultDisplay)
 
       var ul = document.createElement('ul'); 
       var li = document.createElement('li');
